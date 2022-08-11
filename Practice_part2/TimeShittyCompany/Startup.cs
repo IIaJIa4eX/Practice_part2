@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TimeShittyCompany.DAL.Interfaces;
+using TimeShittyCompany.Repositories;
 
 namespace TimeShittyCompany
 {
@@ -28,6 +30,8 @@ namespace TimeShittyCompany
         {
 
             services.AddControllers();
+            services.AddSingleton<IPersonRepository,PersonRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TimeShittyCompany", Version = "v1" });
