@@ -13,6 +13,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using TimeShittyCompany.DAL.Interfaces;
 using TimeShittyCompany.Repositories;
+using TimeShittyCompany.Services;
+using TimeShittyCompany.Services.Interfaces;
+using TimeShittyCompany.Utils;
 
 namespace TimeShittyCompany
 {
@@ -31,6 +34,8 @@ namespace TimeShittyCompany
 
             services.AddControllers();
             services.AddSingleton<IPersonRepository,PersonRepository>();
+            services.AddSingleton<IPersonService, PersonService>();
+            services.AddSingleton<IDataGenerator, DataGenerator>();
 
             services.AddSwaggerGen(c =>
             {

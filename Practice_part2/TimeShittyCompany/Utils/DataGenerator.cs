@@ -6,13 +6,15 @@ using TimeShittyCompany.Models.Common;
 
 namespace TimeShittyCompany.Utils
 {
-    public class DataGenerator
+    public interface IDataGenerator
+    {
+        List<Person> GetPersonData();
+    }
+
+    public class DataGenerator : IDataGenerator
     {
         
-        public DataGenerator()
-        {
-
-        }
+          
         public List<Person> GetPersonData()
         {
             return new List<Person>() {
@@ -126,4 +128,6 @@ namespace TimeShittyCompany.Utils
 
         }
     }
+
+   
 }

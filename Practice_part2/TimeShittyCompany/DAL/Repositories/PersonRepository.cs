@@ -13,29 +13,43 @@ namespace TimeShittyCompany.Repositories
     public class PersonRepository : IPersonRepository
     {
         private readonly List<Person> _persons;
-        public PersonRepository()
+        IDataGenerator _dataGenerator;
+        public PersonRepository(IDataGenerator dataGenerator)
         {
-
+            _dataGenerator = dataGenerator;
+            _persons = _dataGenerator.GetPersonData();
+           
         }
 
-        public string AddNewPerson()
+        public void AddNewPerson(Person person)
         {
-            throw new NotImplementedException();
+            _persons.Add(person);
         }
 
-        public string DeletePersonById(int id)
+        public void DeletePersonById(int id)
         {
-            throw new NotImplementedException();
+            _persons.RemoveAll(person => person.Id == id);
         }
 
         public Person GetById(int id)
         {
-            throw new NotImplementedException();
+
+            return _persons.Where(person => person.Id == id).FirstOrDefault();
+            
         }
 
-        public Person GetByName(string Name)
+        public List<Person> GetByName(string Name)
         {
-            throw new NotImplementedException();
+            return _persons.Where(person => person.FirstName == Name).ToList();
+        }
+
+        public int GetPersonsCount()
+        {
+            return _persons.Count();
+        }
+        public List<Person> GetPage(int skip, int take)
+        {
+            return _persons.Skip(skip).Take(take).ToList();
         }
 
         public List<Person> GetPersonsList(int skip, int take)
@@ -43,9 +57,14 @@ namespace TimeShittyCompany.Repositories
             throw new NotImplementedException();
         }
 
-        public string UpdatePersonById(int id)
+        public void UpdatePersonById(Person person)
         {
-            throw new NotImplementedException();
+            Person perToUpdate =_persons.Where(tmpPerson => tmpPerson.Id == person.Id).FirstOrDefault();
+            perToUpdate.Age = person.Age;
+            perToUpdate.Email = person.Email;
+            perToUpdate.FirstName = person.FirstName;
+            perToUpdate.LastName = person.LastName;
+            perToUpdate.Company = person.Company;
         }
     }
 }
