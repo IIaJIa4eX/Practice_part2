@@ -6,6 +6,7 @@ using TimeShittyCompany.Models.Common;
 
 namespace TimeShittyCompany.Utils
 {
+    //for review
     public interface IDataGenerator
     {
         List<Person> GetPersonData();

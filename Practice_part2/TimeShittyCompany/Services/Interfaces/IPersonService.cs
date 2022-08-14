@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using TimeShittyCompany.Models.Common;
 
 namespace TimeShittyCompany.Services.Interfaces
 {
+    //for review
     public interface IPersonService
     {
         Person GetById(int id);
@@ -16,6 +18,8 @@ namespace TimeShittyCompany.Services.Interfaces
         string DeletePersonById(int id);
 
         List<Person> GetPage(int skip, int take);
+
+        IActionResult TestFunc();
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,11 +9,10 @@ using TimeShittyCompany.Services.Interfaces;
 
 namespace TimeShittyCompany.Services
 {
-    
-    public class PersonService : IPersonService
+    //for review
+    public class PersonService : ControllerBase, IPersonService
     {
         private IPersonRepository _personRepository;
-
         public PersonService(IPersonRepository personRepository)
         {
             _personRepository = personRepository;
@@ -179,5 +179,13 @@ namespace TimeShittyCompany.Services
 
             return answer;
         }
+
+        public IActionResult TestFunc()
+        {
+
+            return Ok("asd");
+        }
     }
+
+    
 }

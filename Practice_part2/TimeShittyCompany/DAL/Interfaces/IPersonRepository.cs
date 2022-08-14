@@ -6,6 +6,7 @@ using TimeShittyCompany.Models.Common;
 
 namespace TimeShittyCompany.DAL.Interfaces
 {
+    //for review
     public interface IPersonRepository
     {
 

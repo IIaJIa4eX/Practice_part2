@@ -9,7 +9,7 @@ using TimeShittyCompany.Utils;
 
 namespace TimeShittyCompany.Repositories
 {
-
+    //for review
     public class PersonRepository : IPersonRepository
     {
         private readonly List<Person> _persons;

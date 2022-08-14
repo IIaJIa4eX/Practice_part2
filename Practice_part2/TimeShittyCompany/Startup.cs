@@ -19,6 +19,7 @@ using TimeShittyCompany.Utils;
 
 namespace TimeShittyCompany
 {
+    //for review
     public class Startup
     {
         public Startup(IConfiguration configuration)

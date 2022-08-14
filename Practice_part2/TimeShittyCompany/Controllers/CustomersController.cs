@@ -8,6 +8,7 @@ using TimeShittyCompany.Services.Interfaces;
 
 namespace TimeShittyCompany.Controllers
 {
+    //for review
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
@@ -52,8 +53,8 @@ namespace TimeShittyCompany.Controllers
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
-        {
-            return Ok(_personService.GetById(id));
+        {         
+           return Ok(_personService.GetById(id));
         }
 
         [HttpPost("register")]

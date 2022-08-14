@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace TimeShittyCompany.Models.Common
 {
+    //for review
     public class Person
     {
         public int Id { get; set; } = 0;
