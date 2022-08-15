@@ -13,12 +13,12 @@ namespace TimeShittyCompany.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private IPersonService _personService;
+        private IUsersService _userService;
 
 
-        public CustomersController(IPersonService personService)
+        public CustomersController(IUsersService userService)
         {
-            _personService = personService;
+            _userService = userService;
         }
 
 
@@ -26,7 +26,7 @@ namespace TimeShittyCompany.Controllers
         //https://localhost:5001/api/customers/search/?searchterm=Alexander - для теста
         public IActionResult GetByName([FromQuery] string searchterm)
         {
-            var data = _personService.GetByName(searchterm);
+            var data = _userService.GetByName(searchterm);
             if(data == null || data.Count == 0)
             {
                 return BadRequest("Никого нет с таким именем");
@@ -40,7 +40,7 @@ namespace TimeShittyCompany.Controllers
         //https://localhost:5001/api/customers/?skip=0&take=70
         public IActionResult GetPage([FromQuery] int skip, int take)
         {
-            var data = _personService.GetPage(skip, take);
+            var data = _userService.GetPage(skip, take);
 
             if (data == null || data.Count == 0)
             {
@@ -54,26 +54,26 @@ namespace TimeShittyCompany.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {         
-           return Ok(_personService.GetById(id));
+           return Ok(_userService.GetById(id));
         }
 
         [HttpPost("register")]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] User person)
         {
-            return Ok(_personService.AddNewPerson(person));
+            return Ok(_userService.AddNewUser(person));
         }
 
 
         [HttpPut("update")]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] User person)
         {
-            return Ok(_personService.UpdatePersonById(person));
+            return Ok(_userService.UpdateUserById(person));
         }
 
         [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
-            return Ok(_personService.DeletePersonById(id));
+            return Ok(_userService.DeleteUserById(id));
         }
     }
 }

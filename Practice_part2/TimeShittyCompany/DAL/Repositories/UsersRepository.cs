@@ -10,35 +10,35 @@ using TimeShittyCompany.Utils;
 namespace TimeShittyCompany.Repositories
 {
     //for review
-    public class PersonRepository : IPersonRepository
+    public class UsersRepository : IUsersRepository
     {
-        private readonly List<Person> _persons;
+        private readonly List<User> _persons;
         IDataGenerator _dataGenerator;
-        public PersonRepository(IDataGenerator dataGenerator)
+        public UsersRepository(IDataGenerator dataGenerator)
         {
             _dataGenerator = dataGenerator;
             _persons = _dataGenerator.GetPersonData();
            
         }
 
-        public void AddNewPerson(Person person)
+        public void AddNewUser(User person)
         {
             _persons.Add(person);
         }
 
-        public void DeletePersonById(int id)
+        public void DeleteUserById(int id)
         {
             _persons.RemoveAll(person => person.Id == id);
         }
 
-        public Person GetById(int id)
+        public User GetById(int id)
         {
 
             return _persons.Where(person => person.Id == id).FirstOrDefault();
             
         }
 
-        public List<Person> GetByName(string Name)
+        public List<User> GetByName(string Name)
         {
             return _persons.Where(person => person.FirstName == Name).ToList();
         }
@@ -47,19 +47,19 @@ namespace TimeShittyCompany.Repositories
         {
             return _persons.Count();
         }
-        public List<Person> GetPage(int skip, int take)
+        public List<User> GetPage(int skip, int take)
         {
             return _persons.Skip(skip).Take(take).ToList();
         }
 
-        public List<Person> GetPersonsList(int skip, int take)
+        public List<User> GetUsersList(int skip, int take)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdatePersonById(Person person)
+        public void UpdateUserById(User person)
         {
-            Person perToUpdate =_persons.Where(tmpPerson => tmpPerson.Id == person.Id).FirstOrDefault();
+            User perToUpdate =_persons.Where(tmpPerson => tmpPerson.Id == person.Id).FirstOrDefault();
             perToUpdate.Age = person.Age;
             perToUpdate.Email = person.Email;
             perToUpdate.FirstName = person.FirstName;

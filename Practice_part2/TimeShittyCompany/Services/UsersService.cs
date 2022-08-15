@@ -10,15 +10,15 @@ using TimeShittyCompany.Services.Interfaces;
 namespace TimeShittyCompany.Services
 {
     //for review
-    public class PersonService : ControllerBase, IPersonService
+    public class UsersService : ControllerBase, IUsersService
     {
-        private IPersonRepository _personRepository;
-        public PersonService(IPersonRepository personRepository)
+        private IUsersRepository _usersRepository;
+        public UsersService(IUsersRepository personRepository)
         {
-            _personRepository = personRepository;
+            _usersRepository = personRepository;
         }
 
-        public string AddNewPerson(Person person)
+        public string AddNewUser(User person)
         {
             string answer;
             if (person.Id == -1)
@@ -29,7 +29,7 @@ namespace TimeShittyCompany.Services
             {
                 try
                 {
-                    Person tmpPerson = _personRepository.GetById(person.Id);
+                    User tmpPerson = _usersRepository.GetById(person.Id);
 
                     if (tmpPerson != null)
                     {
@@ -38,9 +38,9 @@ namespace TimeShittyCompany.Services
                     }
                     else
                     {
-                        _personRepository.AddNewPerson(person);
+                        _usersRepository.AddNewUser(person);
 
-                        tmpPerson = _personRepository.GetById(person.Id);
+                        tmpPerson = _usersRepository.GetById(person.Id);
                         if (person.Equals(tmpPerson))
                         {
                             answer = "Новый клиент добавлен успешно!";
@@ -62,14 +62,14 @@ namespace TimeShittyCompany.Services
             return answer;
         }
 
-        public string DeletePersonById(int id)
+        public string DeleteUserById(int id)
         {
             string answer;
             try
             {
-                _personRepository.DeletePersonById(id);
+                _usersRepository.DeleteUserById(id);
 
-                Person person = _personRepository.GetById(id);
+                User person = _usersRepository.GetById(id);
 
                 if (person != null)
                 {
@@ -91,24 +91,24 @@ namespace TimeShittyCompany.Services
 
         }
 
-        public Person GetById(int id)
+        public User GetById(int id)
         {
-            Person person = _personRepository.GetById(id);
+            User person = _usersRepository.GetById(id);
 
             if(person == null)
             {
-                return new Person() {Id = id };
+                return new User() {Id = id };
             }
 
             return person;
         }
 
-        public List<Person> GetByName(string Name)
+        public List<User> GetByName(string Name)
         {
-            List<Person> personsList;
+            List<User> personsList;
             try
             {
-                personsList = _personRepository.GetByName(Name);
+                personsList = _usersRepository.GetByName(Name);
                 
             }
             catch
@@ -119,12 +119,12 @@ namespace TimeShittyCompany.Services
             return personsList;
         }
 
-        public List<Person> GetPage(int skip, int take)
+        public List<User> GetPage(int skip, int take)
         {
-            List<Person> personsList;
+            List<User> personsList;
             try
             {
-                int count = _personRepository.GetPersonsCount();
+                int count = _usersRepository.GetPersonsCount();
                 if (skip > count || skip < 0 || take < 0)
                 {
                     return null;
@@ -132,10 +132,10 @@ namespace TimeShittyCompany.Services
 
                 if (skip + take > count)
                 {
-                    personsList =  _personRepository.GetPage(skip, count - skip);
+                    personsList =  _usersRepository.GetPage(skip, count - skip);
                 }
 
-                personsList =  _personRepository.GetPage(skip, take);
+                personsList =  _usersRepository.GetPage(skip, take);
             }
             catch
             {
@@ -145,23 +145,23 @@ namespace TimeShittyCompany.Services
             return personsList;
         }
 
-        public List<Person> GetPersonsList(int skip, int take)
+        public List<User> GetUsersList(int skip, int take)
         {
             throw new NotImplementedException();
         }
 
-        public string UpdatePersonById(Person person)
+        public string UpdateUserById(User person)
         {
             string answer;
             try
             {
-                Person tmpPerson = _personRepository.GetById(person.Id);
+                User tmpPerson = _usersRepository.GetById(person.Id);
 
                 if (tmpPerson != null)
                 {
-                    _personRepository.UpdatePersonById(person);
+                    _usersRepository.UpdateUserById(person);
 
-                    tmpPerson = _personRepository.GetById(person.Id);
+                    tmpPerson = _usersRepository.GetById(person.Id);
 
                     answer = "Обновление прошло успешно";
    
