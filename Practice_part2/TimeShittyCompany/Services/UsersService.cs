@@ -38,7 +38,7 @@ namespace TimeShittyCompany.Services
                     }
                     else
                     {
-                        _usersRepository.AddNewUser(person);
+                        _usersRepository.Add(person);
 
                         tmpPerson = _usersRepository.GetById(person.Id);
                         if (person.Equals(tmpPerson))
@@ -67,7 +67,7 @@ namespace TimeShittyCompany.Services
             string answer;
             try
             {
-                _usersRepository.DeleteUserById(id);
+                _usersRepository.DeleteById(id);
 
                 User person = _usersRepository.GetById(id);
 
@@ -159,7 +159,7 @@ namespace TimeShittyCompany.Services
 
                 if (tmpPerson != null)
                 {
-                    _usersRepository.UpdateUserById(person);
+                    _usersRepository.UpdateById(person);
 
                     tmpPerson = _usersRepository.GetById(person.Id);
 

@@ -21,12 +21,12 @@ namespace TimeShittyCompany.Repositories
            
         }
 
-        public void AddNewUser(User person)
+        public void Add(User person)
         {
             _persons.Add(person);
         }
 
-        public void DeleteUserById(int id)
+        public void DeleteById(int id)
         {
             _persons.RemoveAll(person => person.Id == id);
         }
@@ -57,7 +57,7 @@ namespace TimeShittyCompany.Repositories
             throw new NotImplementedException();
         }
 
-        public void UpdateUserById(User person)
+        public void UpdateById(User person)
         {
             User perToUpdate =_persons.Where(tmpPerson => tmpPerson.Id == person.Id).FirstOrDefault();
             perToUpdate.Age = person.Age;

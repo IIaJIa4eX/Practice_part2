@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TimeShittyCompany.DAL.DBConnect;
 using TimeShittyCompany.DAL.Interfaces;
 using TimeShittyCompany.Repositories;
 using TimeShittyCompany.Services;
@@ -34,8 +35,9 @@ namespace TimeShittyCompany
         {
 
             services.AddControllers();
-            services.AddSingleton<IPersonRepository,PersonRepository>();
-            services.AddSingleton<IPersonService, PersonService>();
+            services.AddSingleton<DBConnection>();
+            services.AddSingleton<IUsersRepository,UsersRepository>();
+            services.AddSingleton<IUsersService, UsersService>();
             services.AddSingleton<IDataGenerator, DataGenerator>();
 
             services.AddSwaggerGen(c =>

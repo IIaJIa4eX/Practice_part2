@@ -7,15 +7,12 @@ using TimeShittyCompany.Models.Common;
 namespace TimeShittyCompany.DAL.Interfaces
 {
     //for review
-    public interface IUsersRepository
+    public interface IUsersRepository : IRepository<User>
     {
 
-        User GetById(int id);
+        
         List<User> GetByName(string Name);
         List<User> GetUsersList(int skip, int take);
-        void AddNewUser(User p);
-        void UpdateUserById(User person);
-        void DeleteUserById(int id);
         List<User> GetPage(int skip, int take);
         int GetPersonsCount();
 
