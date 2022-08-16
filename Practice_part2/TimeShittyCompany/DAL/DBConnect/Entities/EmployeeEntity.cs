@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace TimeShittyCompany.DAL.DBContext.Entities
 {
 
-    [Table("Employees", Schema = "Test")]
     public sealed class EmployeeEntity
     {
 

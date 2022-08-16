@@ -8,10 +8,8 @@ using TimeShittyCompany.Models.Common;
 namespace TimeShittyCompany.DAL.DBContext.Entities
 {
 
-    [Table("Users", Schema = "Test")]
     public sealed class UserEntity
     {
-
         public int Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;

@@ -9,7 +9,6 @@ namespace TimeShittyCompany.DAL.Interfaces
     interface IEmployeesRepository : IRepository<Employee>
     {
         List<Employee> GetByName(string Name);
-        List<Employee> GetUsersList(int skip, int take);
         List<Employee> GetPage(int skip, int take);
         int GetPersonsCount();
     }

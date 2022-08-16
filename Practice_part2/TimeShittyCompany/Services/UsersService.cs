@@ -52,9 +52,10 @@ namespace TimeShittyCompany.Services
 
                     }
                 }
-                catch
+                catch (Exception e)
                 {
-                    answer = "Ошибка! При создании клиента что-то пошло не так";
+
+                    answer = $"Ошибка! При создании клиента что-то пошло не так: {e.Message}";
                 }
                
             }

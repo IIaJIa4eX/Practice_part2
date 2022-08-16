@@ -4,22 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TimeShittyCompany.DAL.DBContext.Entities;
+using TimeShittyCompany.Models.Common;
 
 namespace TimeShittyCompany.DAL.DBConnect
 {
     public class DBConnection : DbContext
     {
-        public DbSet<UserEntity> userEntity { get; set; }
-        public DbSet<UserEntity> employeeEntity { get; set; }
+        public DbSet<User> userEntity { get; set; }
+        public DbSet<Employee> employeeEntity { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=192.168.1.1;Database=GeekBrains;Username=postgres;Password=qwe123; ");
+            optionsBuilder.UseNpgsql("Host=127.0.0.1;Database=postgres;Username=postgres;Password=admin;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<UserEntity>().Ignore(x => x.Id);
+            
         }
 
     }

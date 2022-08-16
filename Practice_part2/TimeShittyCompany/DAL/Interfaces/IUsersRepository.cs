@@ -12,7 +12,6 @@ namespace TimeShittyCompany.DAL.Interfaces
 
         
         List<User> GetByName(string Name);
-        List<User> GetUsersList(int skip, int take);
         List<User> GetPage(int skip, int take);
         int GetPersonsCount();
 

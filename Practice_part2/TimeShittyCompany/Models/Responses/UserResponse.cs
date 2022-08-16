@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace TimeShittyCompany.Models.Responses
 {
     //for review
-    public class PersonResponse
+    public class UserResponse
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

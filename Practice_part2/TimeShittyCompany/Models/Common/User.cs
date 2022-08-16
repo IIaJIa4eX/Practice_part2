@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace TimeShittyCompany.Models.Common
 {
     //for review
+
+    [Table("Users")]
     public class User : CommonInfo
     {    
         public string Email { get; set; } = string.Empty;
