@@ -13,15 +13,10 @@ namespace TimeShittyCompany.Repositories
     //for review
     public class UsersRepository : IUsersRepository
     {
-        private readonly List<User> _persons;
-        IDataGenerator _dataGenerator;
         private readonly DBConnection _context;
-        public UsersRepository(IDataGenerator dataGenerator, DBConnection context)
+        public UsersRepository(DBConnection context)
         {
-            _context = context;
-            _dataGenerator = dataGenerator;
-            _persons = _dataGenerator.GetPersonData();
-           
+            _context = context;           
         }
 
         public void Add(User person)
@@ -33,19 +28,29 @@ namespace TimeShittyCompany.Repositories
 
         public void DeleteById(int id)
         {
-            _persons.RemoveAll(person => person.Id == id);
+            _context.userEntity.Where(
+                tmpPerson => tmpPerson.Id == id
+                )
+                .FirstOrDefault()
+                .isDeleted = true;
+            _context.SaveChanges();
         }
 
         public User GetById(int id)
         {
 
-            return _context.userEntity.Where(user => user.Id == id).FirstOrDefault();
+            return _context.userEntity.Where(
+                user => user.Id == id && user.isDeleted == false)
+                .FirstOrDefault();
             
         }
 
         public List<User> GetByName(string Name)
         {
-            return _context.userEntity.Where(person => person.FirstName == Name).ToList();
+            return _context.userEntity.Where(
+                person => person.FirstName == Name
+                && person.isDeleted == false)
+                .ToList();
         }
 
         public int GetPersonsCount()
@@ -54,7 +59,10 @@ namespace TimeShittyCompany.Repositories
         }
         public List<User> GetPage(int skip, int take)
         {
-            return _context.userEntity.Skip(skip).Take(take).ToList();
+            return _context.userEntity.Skip(skip)
+                .Take(take)
+                .Where(user => user.isDeleted == false)
+                .ToList();
         }
 
 

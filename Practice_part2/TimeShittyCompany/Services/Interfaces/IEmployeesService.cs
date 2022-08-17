@@ -6,7 +6,7 @@ using TimeShittyCompany.Models.Common;
 
 namespace TimeShittyCompany.Services.Interfaces
 {
-    interface IEmployeesService
+    public interface IEmployeesService
     {
 
             Employee GetById(int id);

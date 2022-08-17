@@ -162,8 +162,6 @@ namespace TimeShittyCompany.Services
                 {
                     _usersRepository.UpdateById(person);
 
-                    tmpPerson = _usersRepository.GetById(person.Id);
-
                     answer = "Обновление прошло успешно";
    
                 }
