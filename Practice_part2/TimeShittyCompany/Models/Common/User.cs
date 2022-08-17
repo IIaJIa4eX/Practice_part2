@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimeShittyCompany.Models.Common
 {
-    //for review
+    //_for review
 
     [Table("Users")]
     public class User : CommonInfo

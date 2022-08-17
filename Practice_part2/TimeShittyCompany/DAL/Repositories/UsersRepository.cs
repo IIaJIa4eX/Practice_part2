@@ -10,7 +10,7 @@ using TimeShittyCompany.Utils;
 
 namespace TimeShittyCompany.Repositories
 {
-    //for review
+    //_for review
     public class UsersRepository : IUsersRepository
     {
         private readonly DBConnection _context;

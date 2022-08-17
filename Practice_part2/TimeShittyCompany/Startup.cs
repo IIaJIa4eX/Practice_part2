@@ -21,7 +21,7 @@ using TimeShittyCompany.Utils;
 
 namespace TimeShittyCompany
 {
-    //for review
+    //_for review
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -41,7 +41,6 @@ namespace TimeShittyCompany
             services.AddSingleton<IUsersService, UsersService>();
             services.AddSingleton<IEmployeesRepository, EmployeesRepository>();
             services.AddSingleton<IEmployeesService, EmployeesService>();
-            services.AddSingleton<IDataGenerator, DataGenerator>();
 
             services.AddSwaggerGen(c =>
             {

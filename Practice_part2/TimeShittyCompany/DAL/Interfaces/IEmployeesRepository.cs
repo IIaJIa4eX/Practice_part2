@@ -6,6 +6,7 @@ using TimeShittyCompany.Models.Common;
 
 namespace TimeShittyCompany.DAL.Interfaces
 {
+    //_for review
     public interface IEmployeesRepository : IRepository<Employee>
     {
         List<Employee> GetByName(string Name);

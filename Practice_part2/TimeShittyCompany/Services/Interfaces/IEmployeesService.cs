@@ -8,8 +8,8 @@ namespace TimeShittyCompany.Services.Interfaces
 {
     public interface IEmployeesService
     {
-
-            Employee GetById(int id);
+        //_for review
+        Employee GetById(int id);
             List<Employee> GetByName(string Name);
             List<Employee> GetEmployeesList(int skip, int take);
             string AddNewEmployee(Employee employee);

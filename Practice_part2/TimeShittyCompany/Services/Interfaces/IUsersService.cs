@@ -7,7 +7,7 @@ using TimeShittyCompany.Models.Common;
 
 namespace TimeShittyCompany.Services.Interfaces
 {
-    //for review
+    //_for review
     public interface IUsersService
     {
         User GetById(int id);

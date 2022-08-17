@@ -8,6 +8,7 @@ using TimeShittyCompany.Models.Common;
 
 namespace TimeShittyCompany.DAL.DBConnect
 {
+    //_for review
     public class DBConnection : DbContext
     {
         public DbSet<User> userEntity { get; set; }

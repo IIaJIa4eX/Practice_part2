@@ -6,10 +6,9 @@ using TimeShittyCompany.Models.Common;
 
 namespace TimeShittyCompany.DAL.Interfaces
 {
-    //for review
+    //_for review
     public interface IUsersRepository : IRepository<User>
     {
-
         
         List<User> GetByName(string Name);
         List<User> GetPage(int skip, int take);

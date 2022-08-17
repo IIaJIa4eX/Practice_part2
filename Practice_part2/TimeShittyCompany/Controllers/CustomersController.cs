@@ -8,7 +8,7 @@ using TimeShittyCompany.Services.Interfaces;
 
 namespace TimeShittyCompany.Controllers
 {
-    //for review
+    //_for review
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
