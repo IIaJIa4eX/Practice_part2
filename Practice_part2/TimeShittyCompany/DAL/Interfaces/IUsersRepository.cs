@@ -13,6 +13,9 @@ namespace TimeShittyCompany.DAL.Interfaces
         List<User> GetByName(string Name);
         List<User> GetPage(int skip, int take);
         int GetPersonsCount();
+        User CheckData(string email, string password);
+
+        User FindToken(string token);
 
 
     }

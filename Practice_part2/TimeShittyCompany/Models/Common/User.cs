@@ -13,10 +13,14 @@ namespace TimeShittyCompany.Models.Common
     {    
         public string Email { get; set; } = string.Empty;
         public string Company { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
         public int Age
         {
             get; set;
 
         } = -1;
+
+        public string Token { get; set; } = string.Empty;
+        public DateTime Expires { get; set; } = DateTime.Now;
     }
 }

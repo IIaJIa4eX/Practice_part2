@@ -74,7 +74,24 @@ namespace TimeShittyCompany.Repositories
             perToUpdate.FirstName = person.FirstName;
             perToUpdate.LastName = person.LastName;
             perToUpdate.Company = person.Company;
+            perToUpdate.Token = person.Token;
+            perToUpdate.Expires = person.Expires;
             _context.SaveChanges();
+        }
+
+        public User CheckData(string email, string password)
+        {
+            return _context.userEntity.Where(
+                tmpPerson => tmpPerson.Email == email
+                && tmpPerson.Password == password)
+                .FirstOrDefault();
+        }
+
+        public User FindToken(string token)
+        {
+            return _context.userEntity.Where(
+                tmpPerson => tmpPerson.Token == token)
+                .FirstOrDefault();
         }
     }
 }
