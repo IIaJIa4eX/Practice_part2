@@ -23,7 +23,7 @@ namespace TimeShittyCompany.Repositories
         {
             _context.userEntity.Add(person);
             _context.SaveChanges();
-
+            
         }
 
         public void DeleteById(int id)

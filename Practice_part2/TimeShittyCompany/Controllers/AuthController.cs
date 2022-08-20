@@ -27,6 +27,7 @@ namespace TimeShittyCompany.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromQuery] string email, string password)
         {
+            
             JwtTokenResponse token = _authService.Authenticate_TokenResp(email, password);
             if (token is null)
             {
@@ -43,7 +44,7 @@ namespace TimeShittyCompany.Controllers
 
         [Authorize]
         [HttpPost("refresh-token")]
-        public IActionResult Refresh()
+        public IActionResult Refresh(AuthorizationHandlerContext context)
         {
             string oldRefreshToken = Request.Cookies["refreshToken"];
             string newRefreshToken = _authService.RefreshToken(oldRefreshToken);
@@ -60,7 +61,7 @@ namespace TimeShittyCompany.Controllers
             var cookieOptions = new CookieOptions
             {
                 HttpOnly = true,
-                Expires = DateTime.UtcNow.AddDays(7)
+                Expires = DateTime.Now.AddMinutes(120)
             };
             Response.Cookies.Append("refreshToken", token, cookieOptions);
         }

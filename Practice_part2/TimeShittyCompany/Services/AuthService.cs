@@ -20,12 +20,7 @@ namespace TimeShittyCompany.Services
     {
         IUsersRepository _usersRepository;
 
-        private const string secretWord = "!@#^#&&^(%^$_ADFSGJ_vbcn<>?";
-
-        private IDictionary<string, AuthResponse> _users = new Dictionary<string, AuthResponse>()
-            {
-            {"test", new AuthResponse() { Password = "test"}}
-            };
+        public const string secretWord = "!@#^#&&^(%^$_ADFSGJ_vbcn<>?";
 
         public AuthService(IUsersRepository usersRepository)
         {
@@ -36,7 +31,7 @@ namespace TimeShittyCompany.Services
         {
             User tmpUser = _usersRepository.CheckData(email, password);
 
-            if (tmpUser != null)
+            if (tmpUser != null && tmpUser.Id != -1)
             {
                 JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
                 byte[] key = Encoding.ASCII.GetBytes(secretWord);
@@ -94,7 +89,7 @@ namespace TimeShittyCompany.Services
 
                 User tmpUser = _usersRepository.FindToken(token);
 
-                if(tmpUser.Id != -1 && tmpUser != null && DateTime.UtcNow < tmpUser.Expires) { 
+                if(tmpUser.Id != -1 && tmpUser != null && DateTime.Now < tmpUser.Expires) { 
 
                     RefreshToken tmpRefToken = GenerateRefreshToken(tmpUser.Id);
                     tmpUser.Expires = tmpRefToken.Expires;
@@ -118,7 +113,7 @@ namespace TimeShittyCompany.Services
             SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, id.ToString()) }),
-                Expires = DateTime.UtcNow.AddMinutes(minutes),
+                Expires = DateTime.Now.AddMinutes(minutes),
                 SigningCredentials = new SigningCredentials(new
                 SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -129,8 +124,8 @@ namespace TimeShittyCompany.Services
         public RefreshToken GenerateRefreshToken(int id)
         {
             RefreshToken refreshToken = new RefreshToken();
-            refreshToken.Expires = DateTime.UtcNow.AddMinutes(360);
-            refreshToken.Token = GenerateJwtToken(id, 360);
+            refreshToken.Expires = DateTime.Now.AddMinutes(30);
+            refreshToken.Token = GenerateJwtToken(id, 30);
             return refreshToken;
         }
 

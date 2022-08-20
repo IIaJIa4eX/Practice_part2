@@ -21,6 +21,6 @@ namespace TimeShittyCompany.Models.Common
         } = -1;
 
         public string Token { get; set; } = string.Empty;
-        public DateTime Expires { get; set; } = DateTime.Now;
+        public  DateTime Expires { get; set; } = DateTime.Now;
     }
 }

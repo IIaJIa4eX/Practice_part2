@@ -62,6 +62,7 @@ namespace TimeShittyCompany
                     TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(AuthService.secretWord)),
                         ValidateIssuer = false,
                         ValidateLifetime = true,
                         ValidateAudience = false,
