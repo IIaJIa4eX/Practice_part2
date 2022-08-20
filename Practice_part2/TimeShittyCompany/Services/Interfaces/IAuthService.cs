@@ -7,6 +7,7 @@ using TimeShittyCompany.Models.Authorization;
 
 namespace TimeShittyCompany.Services.Interfaces
 {
+    //for review
     public interface IAuthService
     {
         string Authenticate(string email, string password);

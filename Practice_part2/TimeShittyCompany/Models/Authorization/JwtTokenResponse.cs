@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace TimeShittyCompany.Models.Authorization
 {
+    //for review
     public sealed class JwtTokenResponse
     {
         public string Token { get; set; }

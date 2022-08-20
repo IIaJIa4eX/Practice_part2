@@ -24,7 +24,7 @@ using TimeShittyCompany.Utils;
 
 namespace TimeShittyCompany
 {
-    //_for review
+    //for review
     public class Startup
     {
         public Startup(IConfiguration configuration)

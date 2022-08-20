@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace TimeShittyCompany.Models.Authorization
 {
+    //for review
     public sealed class RefreshToken
     {
         public string Token { get; set; }

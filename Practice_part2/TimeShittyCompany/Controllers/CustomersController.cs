@@ -11,7 +11,7 @@ using TimeShittyCompany.Services.Interfaces;
 
 namespace TimeShittyCompany.Controllers
 {
-    //_for review
+    //for review
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
