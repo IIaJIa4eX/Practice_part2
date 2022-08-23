@@ -19,6 +19,8 @@ namespace TimeShittyCompany.Services.Interfaces
 
         List<User> GetPage(int skip, int take);
 
+        public bool IsEmailExist(string email);
+
         IActionResult TestFunc();
 
     }

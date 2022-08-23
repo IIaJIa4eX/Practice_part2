@@ -184,6 +184,13 @@ namespace TimeShittyCompany.Services
 
             return Ok("asd");
         }
+
+        public bool IsEmailExist(string email)
+        {
+
+               return _usersRepository.IsEmailExist(email);
+
+        }
     }
 
     

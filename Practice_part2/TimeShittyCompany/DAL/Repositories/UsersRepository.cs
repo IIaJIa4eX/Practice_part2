@@ -93,5 +93,12 @@ namespace TimeShittyCompany.Repositories
                 tmpPerson => tmpPerson.Token == token)
                 .FirstOrDefault();
         }
+
+        public bool IsEmailExist(string email)
+        {
+            return _context.userEntity.Where(
+                tmpPerson => tmpPerson.Email == email)
+                .Count() > 0;
+        }
     }
 }

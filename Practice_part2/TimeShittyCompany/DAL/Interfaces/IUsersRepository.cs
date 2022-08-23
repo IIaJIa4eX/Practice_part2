@@ -16,7 +16,7 @@ namespace TimeShittyCompany.DAL.Interfaces
         User CheckData(string email, string password);
 
         User FindToken(string token);
-
+        public bool IsEmailExist(string email);
 
     }
 }

@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson1", "Lesson1", "{0034
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson2", "Lesson2", "{1A3B33F8-90B1-4126-9050-BC9E9CEE63ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeShittyCompany", "TimeShittyCompany\TimeShittyCompany.csproj", "{B4B8E1A3-89F7-4333-8999-306FE187C379}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeShittyCompany", "TimeShittyCompany\TimeShittyCompany.csproj", "{B4B8E1A3-89F7-4333-8999-306FE187C379}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
