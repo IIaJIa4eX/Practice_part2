@@ -6,10 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using TimeShittyCompany.Models.Common;
 using TimeShittyCompany.Services.Interfaces;
+using TimeShittyCompany.Services.Validation.Interfaces;
 
 namespace TimeShittyCompany.Services.Validation
 {
-    public sealed class UserValidationService : AbstractValidator<User>
+    public sealed class UserValidationService : FluentValidationService<User>, IUserValidationService
     {
         IUsersService _userService;
         public UserValidationService(IUsersService userService)

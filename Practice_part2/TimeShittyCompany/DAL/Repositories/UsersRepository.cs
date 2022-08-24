@@ -6,6 +6,7 @@ using TimeShittyCompany.DAL.DBConnect;
 using TimeShittyCompany.DAL.Interfaces;
 using TimeShittyCompany.Models.Common;
 using TimeShittyCompany.Models.Responses;
+using TimeShittyCompany.Services.Validation.Interfaces;
 using TimeShittyCompany.Utils;
 
 namespace TimeShittyCompany.Repositories
@@ -100,5 +101,6 @@ namespace TimeShittyCompany.Repositories
                 tmpPerson => tmpPerson.Email == email)
                 .Count() > 0;
         }
+
     }
 }

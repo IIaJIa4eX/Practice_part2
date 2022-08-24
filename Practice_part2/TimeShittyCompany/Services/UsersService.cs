@@ -1,11 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TimeShittyCompany.DAL.Interfaces;
+using TimeShittyCompany.Models;
 using TimeShittyCompany.Models.Common;
+using TimeShittyCompany.Models.Responses;
 using TimeShittyCompany.Services.Interfaces;
+using TimeShittyCompany.Services.Validation;
+using TimeShittyCompany.Services.Validation.Interfaces;
 
 namespace TimeShittyCompany.Services
 {
@@ -13,9 +18,11 @@ namespace TimeShittyCompany.Services
     public class UsersService : ControllerBase, IUsersService
     {
         private IUsersRepository _usersRepository;
-        public UsersService(IUsersRepository personRepository)
+        private readonly IUserValidationService _validationService;
+        public UsersService(IUsersRepository personRepository, IUserValidationService validationService)
         {
             _usersRepository = personRepository;
+            _validationService = validationService;
         }
 
         public string AddNewUser(User person)
@@ -189,6 +196,90 @@ namespace TimeShittyCompany.Services
         {
 
                return _usersRepository.IsEmailExist(email);
+
+        }
+
+        public IOperationResult<UserResponse> AddNewUserValidation(User person)
+        {
+            var failures = _validationService.ValidateEntity(person);
+            if(failures.Count > 0)
+            {
+                return new OperationResult<UserResponse> {
+                    Failures = failures,
+                    Succeed = false,
+                    Result = null};
+            }
+          
+
+            try
+            {
+                User tmpPerson = _usersRepository.GetById(person.Id);
+
+                if (tmpPerson != null)
+                {
+
+                    return new OperationResult<UserResponse>
+                    {
+                        Failures = failures,
+                        Succeed = false,
+                        Result = new UserResponse()
+                        {
+                            Message = "Такой id уже есть, введите другой!"
+                        }
+                    };
+                 }
+                else
+                {
+                    _usersRepository.Add(person);
+
+                    tmpPerson = _usersRepository.GetById(person.Id);
+                    if (person.Equals(tmpPerson))
+                    {
+                        return new OperationResult<UserResponse>
+                        {
+                            Failures = null,
+                            Succeed = true,
+                            Result = new UserResponse {
+                                Message = "Ура! Человек создан",
+                                ResponseBody = new UserDTO {
+                                    FirsName = tmpPerson.FirstName,
+                                    Age = tmpPerson.Age,
+                                    Email = tmpPerson.Email }
+                            }
+                        };
+                    }
+                    else
+                    {
+                        return new OperationResult<UserResponse>
+                        {
+                            Failures = failures,
+                            Succeed = false,
+                            Result = new UserResponse()
+                            {
+                                Message = "Ошибка! Кто-то добавил человека с таким id быстрее! Создание не удалось"
+                            }
+                        };
+                      
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+
+
+                return new OperationResult<UserResponse>
+                {
+                    Failures = failures,
+                    Succeed = false,
+                    Result = new UserResponse()
+                    {
+                        Message = $"Ошибка! При создании клиента что-то пошло не так: {e.Message}"
+                    }
+                };
+
+                 
+            }
 
         }
     }

@@ -12,7 +12,7 @@ using TimeShittyCompany.Services.Interfaces;
 namespace TimeShittyCompany.Controllers
 {
     //for review
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
@@ -66,6 +66,12 @@ namespace TimeShittyCompany.Controllers
         public IActionResult Post([FromBody] User person)
         {
             return Ok(_userService.AddNewUser(person));
+        }
+
+        [HttpPost("registerValidation")]
+        public IActionResult PostWithValidation([FromBody] User person)
+        {
+            return Ok(_userService.AddNewUserValidation(person));
         }
 
 

@@ -20,6 +20,8 @@ using TimeShittyCompany.DAL.Repositories;
 using TimeShittyCompany.Repositories;
 using TimeShittyCompany.Services;
 using TimeShittyCompany.Services.Interfaces;
+using TimeShittyCompany.Services.Validation;
+using TimeShittyCompany.Services.Validation.Interfaces;
 using TimeShittyCompany.Utils;
 
 namespace TimeShittyCompany
@@ -45,6 +47,7 @@ namespace TimeShittyCompany
             services.AddSingleton<IEmployeesRepository, EmployeesRepository>();
             services.AddSingleton<IEmployeesService, EmployeesService>();
             services.AddSingleton<IAuthService, AuthService>();
+            services.AddSingleton<IUserValidationService, UserValidationService>();
             services.AddCors();
 
             services.AddAuthentication(x =>

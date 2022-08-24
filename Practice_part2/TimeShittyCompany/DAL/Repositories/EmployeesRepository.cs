@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TimeShittyCompany.DAL.DBConnect;
 using TimeShittyCompany.DAL.Interfaces;
 using TimeShittyCompany.Models.Common;
+using TimeShittyCompany.Services.Validation.Interfaces;
 
 namespace TimeShittyCompany.DAL.Repositories
 {
@@ -76,5 +77,6 @@ namespace TimeShittyCompany.DAL.Repositories
             perToUpdate.Company = person.Company;
             _context.SaveChanges();
         }
+
     }
 }
