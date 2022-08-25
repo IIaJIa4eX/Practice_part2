@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TimeShittyCompany.DAL.Interfaces;
 using TimeShittyCompany.Models.Common;
 using TimeShittyCompany.Services.Interfaces;
 using TimeShittyCompany.Services.Validation.Interfaces;
@@ -12,38 +13,48 @@ namespace TimeShittyCompany.Services.Validation
 {
     public sealed class UserValidationService : FluentValidationService<User>, IUserValidationService
     {
-        IUsersService _userService;
-        public UserValidationService(IUsersService userService)
+        IUsersRepository _userRep;
+        public UserValidationService(IUsersRepository userRep)
         {
-            _userService = userService;
+            _userRep = userRep;
             RuleFor(x => x.FirstName)
             .NotEmpty()
             .WithMessage("Имя не должно быть пустым")
-            .WithErrorCode("BRL-100.1");
+            .WithErrorCode("usr-001.0");
             RuleFor(x => x.LastName)
             .NotEmpty()
             .WithMessage("Фамилия не должна быть пустым")
-            .WithErrorCode("BRL-100.2");
+            .WithErrorCode("usr-002.0");
             RuleFor(x => x.Email)
             .NotEmpty()
             .WithMessage("Почта не должна быть пустой")
-            .WithErrorCode("BRL-100.3");
+            .WithErrorCode("usr-003.0");
             RuleFor(x => x.Email).Custom((s, context) =>
             {
-                if (_userService.IsEmailExist(s))
+                if (_userRep.IsEmailExist(s))
                 {
-                    context.AddFailure(new ValidationFailure(nameof(User.FirstName), "Пользователь c такой почтой уже существует")
-{
-                        ErrorCode = "BRL-100.4"
+                    context.AddFailure(new ValidationFailure(nameof(User.Email), "Пользователь c такой почтой уже существует")
+                    {
+                        ErrorCode = "usr-003.1"
                     });
                 }
             });
             RuleFor(x => x.Age)
            .NotEmpty()
            .WithMessage("Возраст дожен быть указан")
-           .WithErrorCode("BRL-100.5");
+           .WithErrorCode("usr-004");
+            RuleFor(x => x.Age).Custom((age, context) =>
+            {
+                if (age < 0)
+                {
+                    context.AddFailure(new ValidationFailure(nameof(User.Age), "Возраст не может быть отрицательным")
+                    {
+                        ErrorCode = "usr-004.1"
+                    });
+                }
+            });
         }
 
-        
+
     }
 }

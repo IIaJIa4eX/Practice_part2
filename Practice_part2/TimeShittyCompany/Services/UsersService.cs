@@ -14,7 +14,7 @@ using TimeShittyCompany.Services.Validation.Interfaces;
 
 namespace TimeShittyCompany.Services
 {
-    //_for review
+
     public class UsersService : ControllerBase, IUsersService
     {
         private IUsersRepository _usersRepository;
