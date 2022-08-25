@@ -68,6 +68,7 @@ namespace TimeShittyCompany.Controllers
             return Ok(_userService.AddNewUser(person));
         }
 
+        // for review
         [HttpPost("registerValidation")]
         public IActionResult PostWithValidation([FromBody] User person)
         {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace TimeShittyCompany.Services.Validation.Interfaces
 {
+    // for review
     public interface IOperationResult<TResult>
     {
 

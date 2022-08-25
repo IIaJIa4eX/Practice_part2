@@ -7,6 +7,7 @@ using TimeShittyCompany.Services.Validation.Interfaces;
 
 namespace TimeShittyCompany.Services.Validation
 {
+    // for review
     public class OperationResult<TResult> : IOperationResult<TResult>  where TResult : class
     {
         public TResult Result { get; set; }

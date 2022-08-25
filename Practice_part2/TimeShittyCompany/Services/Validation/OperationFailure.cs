@@ -6,6 +6,7 @@ using TimeShittyCompany.Services.Validation.Interfaces;
 
 namespace TimeShittyCompany.Services.Validation
 {
+    // for review
     public class OperationFailure : IOperationFailure
     {
         public string PropertyName { get; set; }

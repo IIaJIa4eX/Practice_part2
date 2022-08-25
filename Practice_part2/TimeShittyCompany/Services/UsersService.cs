@@ -199,6 +199,7 @@ namespace TimeShittyCompany.Services
 
         }
 
+        // method for review
         public IOperationResult<UserResponse> AddNewUserValidation(User person)
         {
             var failures = _validationService.ValidateEntity(person);

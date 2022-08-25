@@ -6,6 +6,7 @@ using TimeShittyCompany.Models.Common;
 
 namespace TimeShittyCompany.Services.Validation.Interfaces
 {
+    // for review
     public interface IUserValidationService : IValidationService<User>
     {
 

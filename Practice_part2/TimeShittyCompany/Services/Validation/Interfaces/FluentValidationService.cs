@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TimeShittyCompany.Services.Validation.Interfaces
 {
+    // for review
     public abstract class FluentValidationService<TEntity> : AbstractValidator<TEntity>, IValidationService<TEntity>
         where TEntity : class
 
