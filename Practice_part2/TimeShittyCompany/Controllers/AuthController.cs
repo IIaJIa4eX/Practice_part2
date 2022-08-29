@@ -42,6 +42,22 @@ namespace TimeShittyCompany.Controllers
 
         }
 
+        
+        public IActionResult Authenticate_ForTesting([FromQuery] string email, string password)
+        {
+
+            JwtTokenResponse token = _authService.Authenticate_TokenResp(email, password);
+            if (token is null)
+            {
+                return BadRequest(new
+                {
+                    message = "Username or password is incorrect"
+                });
+            }
+            return Ok(token);
+
+        }
+
 
         [Authorize]
         [HttpPost("refresh-token")]
