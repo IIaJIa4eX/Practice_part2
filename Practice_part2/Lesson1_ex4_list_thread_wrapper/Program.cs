@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Lesson1_ex4_list_thread_wrapper
 {
-
+    //_for review
     public class Container<T> where T : class
     {
         public List<T> _list;
