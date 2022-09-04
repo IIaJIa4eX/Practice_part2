@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace Lesson1_ex4_list_thread_wrapper
@@ -36,7 +37,7 @@ namespace Lesson1_ex4_list_thread_wrapper
         {
             lock (_list)
             {
-                return _list;
+                return _list.ToList();
             }
         }
     }
@@ -52,14 +53,13 @@ namespace Lesson1_ex4_list_thread_wrapper
             Thread thread1 = new Thread(() =>
             {
 
-                //   lock (stringList)
-                //   {
-                for (int i = 0; i < 10; i++)
-                {
-                    stringList.Add($"Значение{i}");
 
-                }
-                  //  }
+                        for (int i = 0; i < 10; i++)
+                        {
+                            stringList.Add($"Значение {i}");
+
+                        }
+
                 
             });
             thread1.Name = "#Test1";
@@ -67,24 +67,24 @@ namespace Lesson1_ex4_list_thread_wrapper
 
             Thread thread2 = new Thread(() =>
             {
-                //lock (stringList)
-                //{
-                for (int i = 0; i < 10; i++)
-                {
-                    stringList.Add($"Значение{i}");
+ 
+                        for (int i = 0; i < 10; i++)
+                        {
+                            stringList.Remove($"Значение {i}");
 
-                }
-                // }
+                        }   
+ 
             });
             thread2.Name = "#Test2";
             thread2.Start();
 
-            //lock (stringList) {
-            //    foreach (string item in stringList.GetList())
-            //    {
-            //        Console.WriteLine(item);
-            //    }
-            //}
+
+
+                foreach (string item in stringList.GetList())
+                {
+                Console.WriteLine($"Элемент на текущий момент {item}");
+                }
+            
             Console.ReadKey();
         }
     }
