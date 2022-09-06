@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 namespace TimeShittyCompany.Models
 {
+    //_for review
     public class Invoice
     {
         public Guid Id { get; private set; }
         public DateTime Registered { get; private set; }
-        public int Amount { get; set; }
+        public int Amount { get; private set; }
 
         public List<Sheet> Sheets { get; set; }
 
