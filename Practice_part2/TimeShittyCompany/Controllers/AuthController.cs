@@ -42,7 +42,8 @@ namespace TimeShittyCompany.Controllers
 
         }
 
-        
+        [AllowAnonymous]
+        [HttpPost("authenticate_fortesting")]
         public IActionResult Authenticate_ForTesting([FromQuery] string email, string password)
         {
 

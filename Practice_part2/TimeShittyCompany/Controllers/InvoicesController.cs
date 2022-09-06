@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TimeShittyCompany.Models;
 
 namespace TimeShittyCompany.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class InvoicesController : ControllerBase
     {
         [HttpGet]
@@ -17,10 +19,14 @@ namespace TimeShittyCompany.Controllers
             return Ok("ok");
         }
 
-        [HttpPut("update/{id}")]
-        public IActionResult Put(int id, [FromBody] string value)
+        [HttpGet("{amount}")]
+        public IActionResult Create(int amount)
         {
-            return Ok("updated");
+            Invoice invoice = new Invoice();
+
+            invoice.Create(amount);
+
+            return Ok(invoice);
         }
     }
 }
