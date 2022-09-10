@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace lesson3__threadpool
 {
-
+    //_ofor_review
     public class PoolSettings
     {
         public int _maxThreads { get; private set; }
