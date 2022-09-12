@@ -2,7 +2,7 @@
 
 namespace lesson_3_patterns_part1
 {
-
+    //for_review
     public abstract class Employee
     {
         protected internal int _Rate { get; set; }
