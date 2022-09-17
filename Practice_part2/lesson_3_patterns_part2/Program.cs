@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace lesson_3_patterns_part2
 {
+    //for_review
     class Program
     {
 
