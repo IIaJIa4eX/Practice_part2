@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace lesson_3_patterns_part3.Interfaces
 {
+    //for review
     public interface IScanOutputStrategy
     {
         public void ScanAndSave(IScannerDevice scannerDevice, string outputFileName);

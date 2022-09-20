@@ -2,6 +2,7 @@
 
 namespace ScanFile
 {
+    //for review
     public class ScanHandler
     {
         private readonly byte[] _stream;

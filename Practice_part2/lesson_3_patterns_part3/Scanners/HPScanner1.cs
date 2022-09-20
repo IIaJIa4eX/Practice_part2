@@ -10,7 +10,7 @@ namespace lesson_3_patterns_part3.Scanners
 {
     public class HPScanner1 : IScannerDevice
     {
-
+        //for review
         public byte[] Scan()
         {
 

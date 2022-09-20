@@ -7,12 +7,14 @@ namespace lesson_3_patterns_part3
 {
     class Program
     {
+        //for review
         static void Main(string[] args)
         {
 
             ScannerContext pdfContext = new ScannerContext(new HPScanner1());
             pdfContext.SetupOutputScanStrategy(new PdfScanOutputStrategy());
             pdfContext.Execute("PdfFile!");
+
             ScannerContext wordContext = new ScannerContext(new HPScanner2());
             wordContext.SetupOutputScanStrategy(new WordScanOutputStrategy());
             wordContext.Execute("WordFile!");

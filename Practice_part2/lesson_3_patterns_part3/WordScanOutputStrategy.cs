@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace lesson_3_patterns_part3
 {
+    //for review
     public sealed class WordScanOutputStrategy : IScanOutputStrategy
     {
         public void ScanAndSave(IScannerDevice scannerDevice, string outputFileName)

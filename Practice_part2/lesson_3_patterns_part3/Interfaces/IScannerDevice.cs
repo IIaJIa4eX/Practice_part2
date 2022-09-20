@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace lesson_3_patterns_part3.Interfaces
 {
+    //for review
     public interface IScannerDevice
     {
         byte[] Scan();
