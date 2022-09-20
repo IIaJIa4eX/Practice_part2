@@ -31,11 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lesson_3_patterns_part1", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lesson4", "lesson4", "{53FF176A-634B-4935-8CB6-C2A6E6F7DA94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lesson_3_patterns_part2", "lesson_3_patterns_part2\lesson_3_patterns_part2.csproj", "{15972C62-B65B-4924-BC22-8A7C63DBAAA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lesson_4_patterns_part2", "lesson_3_patterns_part2\lesson_4_patterns_part2.csproj", "{15972C62-B65B-4924-BC22-8A7C63DBAAA2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lesson5", "lesson5", "{B9C745CD-13DF-4386-A532-5336851C4A44}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lesson_3_patterns_part3", "lesson_3_patterns_part3\lesson_3_patterns_part3.csproj", "{EAC84ACB-497A-4FDC-AA51-8FA561315F8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lesson_5_patterns_part3", "lesson_3_patterns_part3\lesson_5_patterns_part3.csproj", "{EAC84ACB-497A-4FDC-AA51-8FA561315F8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScanFile", "ScanFile\ScanFile.csproj", "{A20E2BB9-5A7D-49DF-9A17-110929FE05F6}"
 EndProject
