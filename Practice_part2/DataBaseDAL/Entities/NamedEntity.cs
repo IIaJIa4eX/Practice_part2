@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace DataBaseDAL.Entities
 {
+    //for_review
+
     public abstract class NamedEntity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

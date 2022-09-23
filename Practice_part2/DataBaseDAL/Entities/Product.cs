@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataBaseDAL.Entities
 {
+    //for_review
+
     [Table("Products")]
     public class Product : NamedEntity
     {

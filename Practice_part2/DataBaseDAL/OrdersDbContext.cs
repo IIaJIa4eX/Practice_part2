@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace DataBaseDAL
 {
+    //for_review
+
     public class OrdersDbContext : DbContext
     {
         public DbSet<Buyer> Buyers { get; set; }
