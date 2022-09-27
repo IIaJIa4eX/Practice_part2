@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace MarketProject.Services
 {
-    //for_review
-    public interface IProductService
+    public interface IOrderService
     {
-       Task<Product> AddAsync(decimal price, string category, string name);
+        Task<Order> CreateAsync(int buyerId, string address, string phone, IEnumerable<(int productId, int quantity)> products);
     }
 }

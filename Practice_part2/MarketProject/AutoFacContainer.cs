@@ -15,6 +15,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MarketProject.Models;
+using MarketProject.Extensions;
 
 namespace MarketProject
 {
@@ -32,7 +34,8 @@ namespace MarketProject
         {
             var host = Hosting;
             //await host.StartAsync();
-            await AddNewProduct();
+           // await AddNewProduct();
+            await PrintBuyersAsync();
            // await host.StopAsync();
         }
 
@@ -45,6 +48,7 @@ namespace MarketProject
        .ConfigureContainer<ContainerBuilder>(container => {
 
            container.RegisterType<ProductService>().As<IProductService>().InstancePerLifetimeScope();
+           container.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
            //container.RegisterType<ProductService>().InstancePerLifetimeScope()
            //container.RegisterModule<ServiceModule>();
            //container.RegisterAssemblyModules(Assembly.GetCallingAssembly()); - Reflection, searching for all Modules
@@ -53,15 +57,15 @@ namespace MarketProject
            //Autofac.Configuration
            //var config = new ConfigurationBuilder();
 
-          // config.AddJsonFile("autofac.config.json");//Creating Json
-          
+           // config.AddJsonFile("autofac.config.json");//Creating Json
+
 
 
            //var module = new ConfigurationModule(config.Build());
            //var builder = new ContainerBuilder();
            //builder.RegisterModule(module);
 
-           }
+       }
        )
        .ConfigureHostConfiguration(options =>
            options.AddJsonFile("appsettings.json"))
@@ -111,6 +115,59 @@ namespace MarketProject
             await productsService.AddAsync(222500, "Electronics", "ASUS OverPrice 999");
 
         }
+
+        private static async Task PrintBuyersAsync()
+        {
+            await using (var servicesScope = Services.CreateAsyncScope())
+            {
+                var services = servicesScope.ServiceProvider;
+
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                var context = services.GetRequiredService<OrdersDbContext>();
+
+                await context.Database.MigrateAsync();
+
+                foreach (var buyer in context.Buyers)
+                {
+                    logger.LogInformation($"Покупатель >>> {buyer.Id} {buyer.LastName} {buyer.Name} {buyer.Patronymic} {buyer.Birthday.ToShortDateString()}");
+                }
+
+                var orderService = services.GetRequiredService<IOrderService>();
+
+
+                await orderService.CreateAsync(1, "Tula, Russia", "+88005553535", new (int, int)[] {
+                    new ValueTuple<int, int>(1, 1)
+                });
+
+
+                var catalog = new OrderTemplateModel
+                {
+                    OrderNumber = "8467034",
+                    CreationDate = DateTime.Now,
+                    Products = context.Products
+                };
+
+                string templateFile = "Templates/DefaultTemplate.docx";
+                IOrderInfo report = new OrderInfo(templateFile);
+
+                CreateReport(report, catalog, "Report.docx");
+
+                Console.ReadKey(true);
+            }
+        }
+
+
+        private static void CreateReport(IOrderInfo reportGenerator, OrderTemplateModel catalog, string reportFileName)
+        {
+            reportGenerator.OrderNumber = catalog.OrderNumber;
+            reportGenerator.CreationDate = catalog.CreationDate;
+            reportGenerator.Products = catalog.Products.Select(product => (product.Id, product.Name, product.Category, product.Price));
+
+            var reportFileInfo = reportGenerator.Create(reportFileName);
+            reportFileInfo.Execute();
+        }
+
+
 
 
     }
