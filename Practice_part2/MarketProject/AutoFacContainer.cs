@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MarketProject.Models;
 using MarketProject.Extensions;
+using Microsoft.AspNetCore.Builder;
 
 namespace MarketProject
 {
@@ -25,63 +26,131 @@ namespace MarketProject
     class AutoFacContainer
     {
 
-        private static IHost? _host;
+        //private static IHost? _host;
 
-        public static IHost Hosting => _host ??= CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
+        //public static IHost Hosting => _host ??= CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
+
+        private static WebApplication? _app;
+
+        public static WebApplication App
+        {
+            get
+            {
+                if (_app == null)
+                {
+                    _app = CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
+
+                    if (!_app.Environment.IsDevelopment())
+                    {
+                        _app.UseExceptionHandler("/Home/Error");
+                    }
+                    _app.UseStaticFiles();
+
+                    _app.UseRouting();
+
+                   // _app.UseAuthorization();
+
+                    _app.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
+                }
+                return _app;
+            }
+
+            //_host ??= CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
+        }
+
+
+
 
 
         static async Task Main(string[] args)
         {
-            var host = Hosting;
-            //await host.StartAsync();
+            var app = App;
+            await app.StartAsync();
            // await AddNewProduct();
             await PrintBuyersAsync();
-           // await host.StopAsync();
+            await app.StopAsync();
         }
 
+       // public static IHostBuilder CreateHostBuilder(string[] args)
+       // {
+       //     return Host
+       //.CreateDefaultBuilder(args)
+       //.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+       //.ConfigureContainer<ContainerBuilder>(container => {
 
-        public static IHostBuilder CreateHostBuilder(string[] args)
+       //    container.RegisterType<ProductService>().As<IProductService>().InstancePerLifetimeScope();
+       //    container.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
+       //    container.RegisterType<ProductService>().InstancePerLifetimeScope()
+       //    container.RegisterModule<ServiceModule>();
+       //    container.RegisterAssemblyModules(Assembly.GetCallingAssembly()); -Reflection, searching for all Modules
+
+
+       //    Autofac.Configuration
+       //    var config = new ConfigurationBuilder();
+
+       //    config.AddJsonFile("autofac.config.json");//Creating Json
+
+
+
+       //    var module = new ConfigurationModule(config.Build());
+       //    var builder = new ContainerBuilder();
+       //    builder.RegisterModule(module);
+
+       //}
+       //)
+       //.ConfigureHostConfiguration(options =>
+       //    options.AddJsonFile("appsettings.json"))
+       //.ConfigureAppConfiguration(options =>
+       //    options
+       //        .AddJsonFile("appsettings.json")
+       //        .AddEnvironmentVariables()
+       //        .AddCommandLine(args)).ConfigureLogging(options =>
+       //         options.ClearProviders() // Microsoft.Extensions.Logging
+       //             .AddConsole()
+       //             .AddDebug())
+       //         .ConfigureServices(ConfigureServices);
+       // }
+
+        public static WebApplicationBuilder CreateHostBuilder(string[] args)
         {
-            return Host
-       .CreateDefaultBuilder(args)
-       .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-       .ConfigureContainer<ContainerBuilder>(container => {
+            var webApplicationBuilder = WebApplication.CreateBuilder(args);
+            webApplicationBuilder.Host
+            .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+            .ConfigureContainer<ContainerBuilder>(container => // Autofac
+            {
 
-           container.RegisterType<ProductService>().As<IProductService>().InstancePerLifetimeScope();
-           container.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
-           //container.RegisterType<ProductService>().InstancePerLifetimeScope()
-           //container.RegisterModule<ServiceModule>();
-           //container.RegisterAssemblyModules(Assembly.GetCallingAssembly()); - Reflection, searching for all Modules
+                var config = new ConfigurationBuilder()
+                        .AddJsonFile("autofac.config.json", true, false);
+                var module = new ConfigurationModule(config.Build());
+                var builder = new ContainerBuilder();
+                builder.RegisterModule(module);
 
-
-           //Autofac.Configuration
-           //var config = new ConfigurationBuilder();
-
-           // config.AddJsonFile("autofac.config.json");//Creating Json
-
-
-
-           //var module = new ConfigurationModule(config.Build());
-           //var builder = new ContainerBuilder();
-           //builder.RegisterModule(module);
-
-       }
-       )
-       .ConfigureHostConfiguration(options =>
-           options.AddJsonFile("appsettings.json"))
-       .ConfigureAppConfiguration(options =>
-           options
-               .AddJsonFile("appsettings.json")
-               .AddEnvironmentVariables()
-               .AddCommandLine(args)).ConfigureLogging(options =>
-                options.ClearProviders() // Microsoft.Extensions.Logging
+            })
+            .ConfigureHostConfiguration(options =>
+                options.AddJsonFile("appsettings.json"))
+            .ConfigureAppConfiguration(options =>
+                options.AddJsonFile("appsettings.json")
+                .AddXmlFile("appsettings.xml", true)
+                .AddIniFile("appsettings.ini", true)
+                .AddEnvironmentVariables()
+                .AddCommandLine(args))
+            .ConfigureLogging(options =>
+                options.ClearProviders()
                     .AddConsole()
                     .AddDebug())
-                .ConfigureServices(ConfigureServices);
+            .ConfigureServices(ConfigureServices);
+            return webApplicationBuilder;
         }
+
+
+
 
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
+            services.AddControllersWithViews();
+            services.AddTransient<IOrderService, OrderService>();
 
             services.AddDbContext<OrdersDbContext>(options =>
             {
@@ -95,7 +164,8 @@ namespace MarketProject
         {
             get
             {
-                return Hosting.Services;
+                return App.Services;
+                //return Hosting.Services;
             }
             //OR another way
             // public static IServiceProvider Services => Hosting.Services;
@@ -125,7 +195,7 @@ namespace MarketProject
                 var logger = services.GetRequiredService<ILogger<Program>>();
                 var context = services.GetRequiredService<OrdersDbContext>();
 
-                await context.Database.MigrateAsync();
+                //await context.Database.MigrateAsync();
 
                 foreach (var buyer in context.Buyers)
                 {
@@ -140,17 +210,17 @@ namespace MarketProject
                 });
 
 
-                var catalog = new OrderTemplateModel
-                {
-                    OrderNumber = "8467034",
-                    CreationDate = DateTime.Now,
-                    Products = context.Products
-                };
+                //var catalog = new OrderTemplateModel
+                //{
+                //    OrderNumber = "8467034",
+                //    CreationDate = DateTime.Now,
+                //    Products = context.Products
+                //};
 
-                string templateFile = "Templates/DefaultTemplate.docx";
-                IOrderInfo report = new OrderInfo(templateFile);
+                //string templateFile = "Templates/DefaultTemplate.docx";
+                //IOrderInfo report = new OrderInfo(templateFile);
 
-                CreateReport(report, catalog, "Report.docx");
+                //CreateReport(report, catalog, "Report.docx");
 
                 Console.ReadKey(true);
             }
