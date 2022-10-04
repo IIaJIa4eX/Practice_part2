@@ -1,0 +1,14 @@
+{
+  "defaultAssembly": "MarketProject",
+  "components": [
+    {
+      "type": "MarketProject.Services.ProductService",
+      "services": [
+        {
+          "type": "MarketProject.Services.IProductService"
+        }
+      ],
+      "injectProperties": true
+    }
+  ]
+}

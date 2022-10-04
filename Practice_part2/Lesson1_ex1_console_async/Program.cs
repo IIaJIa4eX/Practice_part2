@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Lesson1_ex1_console_async
 {
-    //done
+    //updated to pullreq
     class Program
     {
 
