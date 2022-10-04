@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32413.511
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson1_ex1_console_async", "Lesson1_ex1_console_async\Lesson1_ex1_console_async.csproj", "{4C72B3B0-51C8-45E3-89CA-1014DC4407E7}"
 EndProject
@@ -43,10 +43,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lesson6", "lesson6", "{C548
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBaseDAL", "DataBaseDAL\DataBaseDAL.csproj", "{41B56CC0-9694-46D4-84B6-2848CD572EF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketProject", "MarketProject\MarketProject.csproj", "{36E4AFF6-A9D4-4140-AF76-654B5754A546}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketProject", "MarketProject\MarketProject.csproj", "{36E4AFF6-A9D4-4140-AF76-654B5754A546}"
 	ProjectSection(ProjectDependencies) = postProject
 		{41B56CC0-9694-46D4-84B6-2848CD572EF5} = {41B56CC0-9694-46D4-84B6-2848CD572EF5}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lesson9", "lesson9", "{AE1E3AAA-5752-46E4-9141-40D49121E8FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "final_project", "final_project\final_project.csproj", "{F320C15E-3127-4DE9-82F8-F095C1BFDA77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,6 +106,10 @@ Global
 		{36E4AFF6-A9D4-4140-AF76-654B5754A546}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36E4AFF6-A9D4-4140-AF76-654B5754A546}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36E4AFF6-A9D4-4140-AF76-654B5754A546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F320C15E-3127-4DE9-82F8-F095C1BFDA77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F320C15E-3127-4DE9-82F8-F095C1BFDA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F320C15E-3127-4DE9-82F8-F095C1BFDA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F320C15E-3127-4DE9-82F8-F095C1BFDA77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,6 +133,8 @@ Global
 		{C5483C05-2B28-4AD9-8AC0-CB10CEC9F191} = {28314F11-B502-4940-BAC6-2FF97A618792}
 		{41B56CC0-9694-46D4-84B6-2848CD572EF5} = {C5483C05-2B28-4AD9-8AC0-CB10CEC9F191}
 		{36E4AFF6-A9D4-4140-AF76-654B5754A546} = {C5483C05-2B28-4AD9-8AC0-CB10CEC9F191}
+		{AE1E3AAA-5752-46E4-9141-40D49121E8FF} = {28314F11-B502-4940-BAC6-2FF97A618792}
+		{F320C15E-3127-4DE9-82F8-F095C1BFDA77} = {AE1E3AAA-5752-46E4-9141-40D49121E8FF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8E6AC8D-8744-4E85-BDD1-8C43B6BADF74}
