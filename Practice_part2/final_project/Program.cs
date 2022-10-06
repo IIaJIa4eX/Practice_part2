@@ -1,3 +1,7 @@
+using final_project.DAL;
+using final_project.DAL.Entities;
+using static final_project.DAL.Entities.User;
+
 namespace final_project
 {
     public class Program
@@ -8,6 +12,9 @@ namespace final_project
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<DBConnection>();
+            CreateUsers();
+
 
             var app = builder.Build();
 
@@ -27,6 +34,36 @@ namespace final_project
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+        }
+
+
+        public static void CreateUsers()
+        {
+            DBConnection context = new DBConnection();
+
+            context.Database.EnsureCreated();
+
+            if (!context.Users.Any())
+            {
+                context.Users.Add(new User
+                {
+                    Name = "Иван",
+                    LastName = "Иванов",
+                    Patronymic = "Иванович",
+                    Email = "test@mail.com"
+                });
+                context.Users.Add(new User
+                {
+                    LastName = "Huan",
+                    Name = "Jamel",
+                    Patronymic = "Korokko",
+                    Email = "test2@mail.com"
+                });
+
+
+                context.SaveChanges();
+            }
+            Console.WriteLine(context.Users.FirstOrDefault().Email);
         }
     }
 }
