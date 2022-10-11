@@ -15,23 +15,23 @@ namespace SafeProjectDBLib.Entities
         public int CardId { get; set; }
 
         [ForeignKey(nameof(Client))]
-        public int ClientId { get; set; }
+        public int ClientId { get; set; } = -1;
 
         [Column]
         [StringLength(255)]
-        public string? OwnerName { get; set; }
+        public string? OwnerName { get; set; } = string.Empty;
         [Column]
         [StringLength(50)]
-        public string? CVV2 { get; set; }
+        public string? CVV2 { get; set; } = string.Empty;
 
         [Column]
         [StringLength(255)]
-        public string? CardNumber { get; set; }
+        public string? CardNumber { get; set; } = string.Empty;
 
         [Column]
-        public DateTime ExpDate { get; set; }
+        public DateTime ExpDate { get; set; } = DateTime.UtcNow;
 
-        public virtual Client Client {get;set;}
+        public virtual Client Client { get; set; } = null;
 
        
     }

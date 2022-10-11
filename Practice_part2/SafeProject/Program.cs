@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using SafeProject.Services.Interfaces;
+using SafeProject.Services.Repositories;
 using SafeProjectDBLib;
 
 namespace SafeProject
@@ -16,6 +18,9 @@ namespace SafeProject
                 
                 options.UseSqlServer(builder.Configuration["Settings:DataBaseOptions:ConnectionString"]);
             });
+
+            builder.Services.AddScoped<ICardRepositoryService, CardRepository>();
+            builder.Services.AddScoped<IClientRepositoryService, ClientRepository>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

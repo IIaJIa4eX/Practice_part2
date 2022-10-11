@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Lesson1_ex4_list_thread_wrapper": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:58832;http://localhost:58836"
+    }
+  }
+}
