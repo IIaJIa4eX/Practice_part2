@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 
 namespace SafeProject.Services.Interfaces
 {
+    //for_review
     public interface ICardRepositoryService
     {
 

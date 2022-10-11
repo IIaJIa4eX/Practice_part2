@@ -5,6 +5,7 @@ using SafeProject.Services.Interfaces;
 
 namespace SafeProject.Controllers
 {
+    //for_review
     [Route("api/[controller]")]
     [ApiController]
     public class CardController : ControllerBase

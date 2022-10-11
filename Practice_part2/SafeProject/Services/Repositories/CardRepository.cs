@@ -5,6 +5,7 @@ using SafeProjectDBLib.Entities;
 
 namespace SafeProject.Services.Repositories
 {
+    //for_review
     public class CardRepository : ICardRepositoryService
     {
 
