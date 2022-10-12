@@ -30,14 +30,14 @@ namespace SafeProject.Controllers
                 {
                     CardId = card.CardId,
                     Message = "Success",
-                    ErrorCode = 0
+                    ErrorCode = 201
                 });
             }
-            return Ok(new CommonCardResponse()
+            return NotFound(new CommonCardResponse()
             {
                 CardId = -1,
                 Message = "Error",
-                ErrorCode = 1
+                ErrorCode = 404
             });
         }
 
@@ -72,7 +72,7 @@ namespace SafeProject.Controllers
                 {
                     CardId = card.CardId,
                     Message = "Success",
-                    ErrorCode = 0
+                    ErrorCode = 201
                 });
             }
             return Ok(new CommonCardResponse()
