@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SafeProject.Models;
 using SafeProject.Services.Interfaces;
@@ -6,17 +7,17 @@ using SafeProject.Services.Interfaces;
 namespace SafeProject.Controllers
 {
     //for_review
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CardController : ControllerBase
     {
-        private readonly ILogger<CardController> _logger;
+        
         private readonly ICardRepositoryService _cardRepositoryService;
 
-        public CardController(ILogger<CardController> logger, ICardRepositoryService cardRepositoryService)
+        public CardController(ICardRepositoryService cardRepositoryService)
         {
             _cardRepositoryService = cardRepositoryService;
-            _logger = logger;
         }
 
 

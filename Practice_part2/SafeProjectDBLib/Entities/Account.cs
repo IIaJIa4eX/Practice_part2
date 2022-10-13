@@ -21,6 +21,9 @@ namespace SafeProjectDBLib.Entities
         public string? PasswordSalt { get; set; }
 
         [StringLength(255)]
+        public string? Password { get; set; }
+
+        [StringLength(255)]
         public string? PasswordHash { get; set; }
 
         [StringLength(255)]
