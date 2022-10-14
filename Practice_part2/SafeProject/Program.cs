@@ -27,6 +27,8 @@ namespace SafeProject
 
             builder.Services.AddScoped<ICardRepositoryService, CardRepository>();
             builder.Services.AddScoped<IClientRepositoryService, ClientRepository>();
+            builder.Services.AddScoped<IAccountRepsitoryService, AccountRepsitory>();
+
             builder.Services.AddSingleton<IAuthService, AuthService>();
 
 
@@ -63,12 +65,12 @@ namespace SafeProject
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TimeShittyCompany", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SafeProject", Version = "v1" });
 
                 c.AddSecurityDefinition("Bearer", new
                 OpenApiSecurityScheme
                 {
-                    Description = "you need auth, man)",
+                    Description = "you need to auth, man)",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,

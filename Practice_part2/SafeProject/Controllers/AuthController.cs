@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
+using SafeProject.Models;
 using SafeProject.Models.Authorization;
 using SafeProject.Services.Interfaces;
 using System.Net.Http.Headers;
@@ -12,10 +13,12 @@ namespace SafeProject.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IAccountRepsitoryService _accountRepsitoryService;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IAccountRepsitoryService accountRepsitoryService)
         {
             _authService = authService;
+            _accountRepsitoryService = accountRepsitoryService;
         }
 
         [HttpPost("login")]
@@ -28,6 +31,13 @@ namespace SafeProject.Controllers
             }
 
             return Ok(authResponse);
+        }
+
+        [HttpPost("create-account")]
+        public IActionResult Create([FromBody] CreateAccountRequest createReq)
+        {
+            
+            return Ok(_accountRepsitoryService.CreateAccount(createReq));
         }
 
         [HttpGet("getinfo")]
