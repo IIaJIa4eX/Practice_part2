@@ -3,6 +3,7 @@ using System.Xml.Linq;
 
 namespace final_project.Models
 {
+    //for_review
     public class UserAddRequestViewModel : IValidatableObject
     {
         [Required(ErrorMessage = "Имя должно быть заполнено!")]
