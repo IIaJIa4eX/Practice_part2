@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SafeProjectDBLib.Entities
 {
+    //for_review
     [Table("Accounts")]
     public  class Account
     {

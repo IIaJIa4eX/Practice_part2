@@ -2,6 +2,7 @@
 
 namespace SafeProject.Models
 {
+    //for_review
     public class CommonAccountResponse : IOperationResult
     {
         public int AccountId { get; set; }
