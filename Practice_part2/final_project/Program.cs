@@ -1,5 +1,6 @@
 using final_project.DAL;
 using final_project.DAL.Entities;
+using final_project.Services;
 using static final_project.DAL.Entities.User;
 
 namespace final_project
@@ -13,7 +14,8 @@ namespace final_project
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddSingleton<DBConnection>();
-            CreateUsers();
+            builder.Services.AddScoped<IUserServiceRepository, UserServiceRepository>();
+            //CreateUsers();
 
 
             var app = builder.Build();
