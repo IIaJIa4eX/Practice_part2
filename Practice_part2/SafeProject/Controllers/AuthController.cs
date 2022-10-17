@@ -53,6 +53,7 @@ namespace SafeProject.Controllers
                 {
                     return Unauthorized();
                 }
+                
 
                 SessionInfo sessionInfo = _authService.GetSessionInfo(sessonToken);
                 if(sessionInfo == null)
