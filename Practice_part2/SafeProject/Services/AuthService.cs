@@ -16,6 +16,7 @@ namespace SafeProject.Services
 
         private readonly Dictionary<string,SessionInfo> _sessions = new Dictionary<string, SessionInfo>();
         private readonly IServiceScopeFactory _IServiceScopeFactory;
+        //Confiuration for Auth
         private readonly IConfiguration _configuration;
 
         public const string secretWord = "!@#^#&&^(%^$_ADFSGJ_vbcn<>?";
@@ -136,6 +137,7 @@ namespace SafeProject.Services
         {
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            //Confiuration for Auth(SecretWord)
             byte[] key = Encoding.ASCII.GetBytes(_configuration["AuthSettings:SecretWord"]);
             SecurityTokenDescriptor tokenDescriptor = new
             SecurityTokenDescriptor
