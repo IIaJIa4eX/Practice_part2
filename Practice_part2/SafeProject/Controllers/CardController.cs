@@ -1,31 +1,34 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using SafeProject.Models;
 using SafeProject.Services.Interfaces;
 
 namespace SafeProject.Controllers
 {
     //for_review
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CardController : ControllerBase
     {
         
         private readonly ICardRepositoryService _cardRepositoryService;
-        private readonly IConfiguration _config;
+        private readonly IOptions<TestConfigurations> _configuration;
 
-        public CardController(ICardRepositoryService cardRepositoryService, IConfiguration config)
+        public CardController(ICardRepositoryService cardRepositoryService, IOptions<TestConfigurations> config)
         {
             _cardRepositoryService = cardRepositoryService;
-            _config = config;
+            _configuration = config;
         }
 
 
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
+            var trst = _configuration.Value.SomeSettings;
+
             var card = _cardRepositoryService.GetById(id);
             if (card != null)
             {

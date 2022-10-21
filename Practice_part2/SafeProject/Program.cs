@@ -20,6 +20,8 @@ namespace SafeProject
 
             // Add services to the container.
 
+            builder.Services.Configure<TestConfigurations>(builder.Configuration.GetSection("CardSettings"));
+
             builder.Services.AddDbContext<CardStorageDbConnection>(options =>
             {
                 //Settings from appsettings
