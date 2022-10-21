@@ -14,10 +14,12 @@ namespace SafeProject.Controllers
     {
         
         private readonly ICardRepositoryService _cardRepositoryService;
+        private readonly IConfiguration _config;
 
-        public CardController(ICardRepositoryService cardRepositoryService)
+        public CardController(ICardRepositoryService cardRepositoryService, IConfiguration config)
         {
             _cardRepositoryService = cardRepositoryService;
+            _config = config;
         }
 
 

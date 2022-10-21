@@ -15,11 +15,13 @@ namespace SafeProject.Controllers
     {
         private readonly IAuthService _authService;
         private readonly IAccountRepsitoryService _accountRepsitoryService;
+        private readonly IConfiguration _configuration;
 
-        public AuthController(IAuthService authService, IAccountRepsitoryService accountRepsitoryService)
+        public AuthController(IAuthService authService, IAccountRepsitoryService accountRepsitoryService, IConfiguration configuration)
         {
             _authService = authService;
             _accountRepsitoryService = accountRepsitoryService;
+            _configuration = configuration;
         }
 
         [HttpPost("login")]

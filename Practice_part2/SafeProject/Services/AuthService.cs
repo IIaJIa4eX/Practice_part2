@@ -16,12 +16,14 @@ namespace SafeProject.Services
 
         private readonly Dictionary<string,SessionInfo> _sessions = new Dictionary<string, SessionInfo>();
         private readonly IServiceScopeFactory _IServiceScopeFactory;
+        private readonly IConfiguration _configuration;
 
         public const string secretWord = "!@#^#&&^(%^$_ADFSGJ_vbcn<>?";
 
-        public AuthService(IServiceScopeFactory serviceScopeFactory)
+        public AuthService(IServiceScopeFactory serviceScopeFactory, IConfiguration configuration)
         {
             _IServiceScopeFactory = serviceScopeFactory;
+            _configuration = configuration;
         }
 
         public SessionInfo GetSessionInfo(string sessionToken)
@@ -132,8 +134,9 @@ namespace SafeProject.Services
 
         private string CreateSessionToken(Account account)
         {
+
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            byte[] key = Encoding.ASCII.GetBytes(secretWord);
+            byte[] key = Encoding.ASCII.GetBytes(_configuration["AuthSettings:SecretWord"]);
             SecurityTokenDescriptor tokenDescriptor = new
             SecurityTokenDescriptor
             {

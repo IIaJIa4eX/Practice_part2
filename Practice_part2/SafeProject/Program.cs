@@ -23,7 +23,7 @@ namespace SafeProject
             builder.Services.AddDbContext<CardStorageDbConnection>(options =>
             {
                 
-                options.UseSqlServer(builder.Configuration["Settings:DataBaseOptions:ConnectionString"]);
+                options.UseSqlServer(builder.Configuration["Settings:DataBaseOptions:SQLConnectionString"]);
             });
 
             builder.Services.AddScoped<ICardRepositoryService, CardRepository>();
