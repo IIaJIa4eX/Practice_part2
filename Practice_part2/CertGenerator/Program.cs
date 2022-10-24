@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Creating root cert..");
+
+            Thread.Sleep(1);
         }
     }
 }
