@@ -20,9 +20,15 @@ namespace CertGenerator
     {
         public void GenerateRootCertificate(CertificateConfiguration settings)
         {
-            SecureRandom secRnd = new();
-            RsaKeyPairGenerator keyGen = new();
-            RsaKeyGenerationParameters param = new RsaKeyGenerationParameters(new Org.BouncyCastle.Math.BigInteger("10001", 16), new SecureRandom(), 512, 25);
+            SecureRandom secRnd = new SecureRandom();
+            RsaKeyPairGenerator keyGen  = new RsaKeyPairGenerator();
+            RsaKeyGenerationParameters param = new RsaKeyGenerationParameters
+                (
+                new Org.BouncyCastle.Math.BigInteger("10001", 16),
+                new SecureRandom(),
+                1024,
+                25
+                );
             keyGen.Init(param);
             AsymmetricCipherKeyPair keyPair = keyGen.GenerateKeyPair();
 
@@ -38,13 +44,12 @@ namespace CertGenerator
             certGen.SetSerialNumber(new Org.BouncyCastle.Math.BigInteger(1, serialNumber));
             certGen.SetIssuerDN(new X509Name(issuer));
             certGen.SetNotBefore(DateTime.Now.ToUniversalTime());
-            certGen.SetNotAfter(DateTime.Now.ToUniversalTime() + new TimeSpan(settings.CertLifeTime * 182, 0, 0, 0));
+            certGen.SetNotAfter(DateTime.Now.ToUniversalTime() + new TimeSpan(settings.CertLifeTime * 365, 0, 0, 0));
             certGen.SetSubjectDN(new X509Name(issuer));
             certGen.SetPublicKey(keyPair.Public);
             certGen.SetSignatureAlgorithm("MD5WITHRSA");
             certGen.AddExtension(X509Extensions.AuthorityKeyIdentifier, false, new AuthorityKeyIdentifierStructure(keyPair.Public));
             certGen.AddExtension(X509Extensions.SubjectKeyIdentifier, false, new SubjectKeyIdentifierStructure(keyPair.Public));
-            KeyUsage keyUsage = new KeyUsage(settings.CertName.EndsWith("CA") ? 182 : 176);
             certGen.AddExtension(X509Extensions.BasicConstraints, false, new BasicConstraints(true));
 
             X509Certificate rootCert = certGen.Generate(keyPair.Private);
@@ -55,8 +60,8 @@ namespace CertGenerator
             {
                 using (FileStream fs = new FileStream(p12File, FileMode.CreateNew))
                 {
-                    Pkcs12Store p12 = new();
-                    X509CertificateEntry certEntry = new(rootCert);
+                    Pkcs12Store p12 = new Pkcs12Store();
+                    X509CertificateEntry certEntry = new X509CertificateEntry(rootCert);
                     p12.SetKeyEntry(settings.CertName, new AsymmetricKeyEntry(keyPair.Private),
                         new X509CertificateEntry[] { certEntry });
                     p12.Save(fs, settings.Password.ToCharArray(), secRnd);
