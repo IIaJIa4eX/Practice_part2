@@ -17,7 +17,7 @@ namespace LocalUserCreator
         {
 
 
-            Console.WriteLine("AppStart");
+            Console.WriteLine("AppStart 4.0");
 
 
             createUser("TestUser", "123456");
