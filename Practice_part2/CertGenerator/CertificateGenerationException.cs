@@ -8,6 +8,7 @@ namespace CertGenerator
 {
     public class CertificateGenerationException : Exception
     {
+        //for_review
         public CertificateGenerationException(string message) : base(message)
         {
 
