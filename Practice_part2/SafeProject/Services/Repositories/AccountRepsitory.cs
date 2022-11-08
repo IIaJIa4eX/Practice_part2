@@ -1,7 +1,10 @@
-﻿using SafeProject.Models;
+﻿using ClientServiceProtos;
+using Grpc.Core;
+using SafeProject.Models;
 using SafeProject.Services.Interfaces;
 using SafeProjectDBLib;
 using SafeProjectDBLib.Entities;
+using System.Runtime.InteropServices;
 
 namespace SafeProject.Services.Repositories
 {
@@ -44,6 +47,41 @@ namespace SafeProject.Services.Repositories
                 Message = "Error",
                 ErrorCode = 401
             };
+        }
+
+        public Task<GetClientResponse> GetByEmail(GetClientRequest req, ServerCallContext serverCall)
+        {
+            try
+            {
+                var client = _context.Accounts.FirstOrDefault(c => c.Emal == req.Email);
+
+                if(client != null)
+                {
+                    return Task.FromResult(new GetClientResponse
+                    {
+                        Id = client.AccountId,
+                        ErrorCode = 200,
+                        ErrorMessage = String.Empty
+                    });
+
+                }
+                return Task.FromResult(new GetClientResponse
+                {
+                    Id = -1,
+                    ErrorCode = 404,
+                    ErrorMessage = $"Client with Email {req.Email} does't exist"
+                });
+
+            }
+            catch(Exception e)
+            {
+                return Task.FromResult(new GetClientResponse
+                {
+                    Id = -1,
+                    ErrorCode = 666,
+                    ErrorMessage = e.Message
+                });
+            }
         }
     }
 }
