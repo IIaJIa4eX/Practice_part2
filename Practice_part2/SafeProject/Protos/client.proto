@@ -7,7 +7,7 @@ package ClientServiceProtos;
 
 service ClientService{
 
-        rpc Get(GetClientRequest) returns (GetClientResponse);
+        rpc GetByEmail(GetClientRequest) returns (GetClientResponse);
 }
 
 message GetClientRequest{

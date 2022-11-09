@@ -20,6 +20,7 @@ namespace SafeProject
 
             // Add services to the container.
 
+            
             builder.Services.Configure<TestConfigurations>(builder.Configuration.GetSection("CardSettings"));
 
             builder.Services.AddDbContext<CardStorageDbConnection>(options =>
@@ -35,29 +36,30 @@ namespace SafeProject
 
             builder.Services.AddSingleton<IAuthService, AuthService>();
 
+            builder.Services.AddGrpc();
 
-            builder.Services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme =
-                JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme =
-                JwtBearerDefaults.AuthenticationScheme;
-            })
-           .AddJwtBearer(x =>
-           {
-               x.RequireHttpsMetadata = false;
-               x.SaveToken = true;
-               x.TokenValidationParameters = new
-                TokenValidationParameters
-               {
-                   ValidateIssuerSigningKey = true,
-                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["AuthSettings:SecretWord"])),
-                   ValidateIssuer = false,
-                   ValidateLifetime = true,
-                   ValidateAudience = false,
-                   ClockSkew = TimeSpan.Zero
-               };
-           });
+           // builder.Services.AddAuthentication(x =>
+           // {
+           //     x.DefaultAuthenticateScheme =
+           //     JwtBearerDefaults.AuthenticationScheme;
+           //     x.DefaultChallengeScheme =
+           //     JwtBearerDefaults.AuthenticationScheme;
+           // })
+           //.AddJwtBearer(x =>
+           //{
+           //    x.RequireHttpsMetadata = false;
+           //    x.SaveToken = true;
+           //    x.TokenValidationParameters = new
+           //     TokenValidationParameters
+           //    {
+           //        ValidateIssuerSigningKey = true,
+           //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["AuthSettings:SecretWord"])),
+           //        ValidateIssuer = false,
+           //        ValidateLifetime = true,
+           //        ValidateAudience = false,
+           //        ClockSkew = TimeSpan.Zero
+           //    };
+           //});
 
 
 
@@ -67,38 +69,51 @@ namespace SafeProject
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SafeProject", Version = "v1" });
+            //builder.Services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "SafeProject", Version = "v1" });
 
-                c.AddSecurityDefinition("Bearer", new
-                OpenApiSecurityScheme
-                {
-                    Description = "you need to auth, man)",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
-                c.AddSecurityRequirement(
-                    new OpenApiSecurityRequirement{{new OpenApiSecurityScheme{
-                    Reference = new OpenApiReference{
-                        Type = ReferenceType.SecurityScheme,Id = "Bearer"}}
-                    ,Array.Empty<string>()}
-                    });
+            //    c.AddSecurityDefinition("Bearer", new
+            //    OpenApiSecurityScheme
+            //    {
+            //        Description = "you need to auth, man)",
+            //        Name = "Authorization",
+            //        In = ParameterLocation.Header,
+            //        Type = SecuritySchemeType.ApiKey,
+            //        Scheme = "Bearer"
+            //    });
+            //    c.AddSecurityRequirement(
+            //        new OpenApiSecurityRequirement{{new OpenApiSecurityScheme{
+            //        Reference = new OpenApiReference{
+            //            Type = ReferenceType.SecurityScheme,Id = "Bearer"}}
+            //        ,Array.Empty<string>()}
+            //        });
 
-            });
+            //});
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                //app.UseSwagger();
+                //app.UseSwaggerUI();
             }
-
+           
             app.UseRouting();
+
+            //app.UseAuthentication();
+            //app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGrpcService<ClientService>();
+
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client....");
+                });
+            });
 
             app.UseCors(x => x
             .SetIsOriginAllowed(origin => true)
@@ -106,8 +121,7 @@ namespace SafeProject
             .AllowAnyHeader()
             .AllowCredentials());
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            
 
 
             app.MapControllers();

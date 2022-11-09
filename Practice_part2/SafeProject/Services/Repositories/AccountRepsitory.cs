@@ -5,6 +5,7 @@ using SafeProject.Services.Interfaces;
 using SafeProjectDBLib;
 using SafeProjectDBLib.Entities;
 using System.Runtime.InteropServices;
+using static ClientServiceProtos.ClientService;
 
 namespace SafeProject.Services.Repositories
 {
@@ -49,39 +50,27 @@ namespace SafeProject.Services.Repositories
             };
         }
 
-        public Task<GetClientResponse> GetByEmail(GetClientRequest req, ServerCallContext serverCall)
+        public CommonAccountResponse GetByEmail(string email)
         {
-            try
+            var client = _context.Accounts.FirstOrDefault(c => c.Emal == email);
+
+            if(client == null)
             {
-                var client = _context.Accounts.FirstOrDefault(c => c.Emal == req.Email);
-
-                if(client != null)
+                return new CommonAccountResponse()
                 {
-                    return Task.FromResult(new GetClientResponse
-                    {
-                        Id = client.AccountId,
-                        ErrorCode = 200,
-                        ErrorMessage = String.Empty
-                    });
-
-                }
-                return Task.FromResult(new GetClientResponse
-                {
-                    Id = -1,
+                    AccountId = -1,
                     ErrorCode = 404,
-                    ErrorMessage = $"Client with Email {req.Email} does't exist"
-                });
+                    Message = "NotFound"
+                };
+            }
 
-            }
-            catch(Exception e)
+            return new CommonAccountResponse()
             {
-                return Task.FromResult(new GetClientResponse
-                {
-                    Id = -1,
-                    ErrorCode = 666,
-                    ErrorMessage = e.Message
-                });
-            }
+                AccountId = client.AccountId,
+                ErrorCode = 200,
+                Message = "Success"
+            };
+
         }
     }
 }

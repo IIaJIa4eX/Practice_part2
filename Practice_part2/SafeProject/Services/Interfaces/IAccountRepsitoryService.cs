@@ -10,6 +10,7 @@ namespace SafeProject.Services.Interfaces
     {
         CommonAccountResponse CreateAccount(CreateAccountRequest req);
 
-        Task<GetClientResponse> GetByEmail(GetClientRequest req, ServerCallContext serverCall);
+        CommonAccountResponse GetByEmail(string email);
+
     }
 }
