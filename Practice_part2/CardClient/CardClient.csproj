@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Proto\" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <Protobuf Include="..\SafeProject\Protos\client.proto" Link="Proto\client.proto" GrpcServices="Client" />
   </ItemGroup>
 

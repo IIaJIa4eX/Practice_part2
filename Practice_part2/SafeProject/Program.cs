@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SafeProject.Services;
 using SafeProject.Services.Interfaces;
 using SafeProject.Services.Repositories;
 using SafeProjectDBLib;
+using System.Net;
 using System.Text;
 
 namespace SafeProject
@@ -18,9 +21,18 @@ namespace SafeProject
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            //explicitly add http2 for gRPC
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.Listen(IPAddress.Any, 5002, o =>
+                {
+                    o.Protocols = HttpProtocols.Http2;
+                    //o.UseHttps();
+                });
+            });
 
-            
+            // Add services to the container.
+            builder.Services.AddGrpc();
             builder.Services.Configure<TestConfigurations>(builder.Configuration.GetSection("CardSettings"));
 
             builder.Services.AddDbContext<CardStorageDbConnection>(options =>
@@ -36,7 +48,7 @@ namespace SafeProject
 
             builder.Services.AddSingleton<IAuthService, AuthService>();
 
-            builder.Services.AddGrpc();
+            
 
            // builder.Services.AddAuthentication(x =>
            // {
@@ -109,10 +121,7 @@ namespace SafeProject
             {
                 endpoints.MapGrpcService<ClientService>();
 
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client....");
-                });
+                endpoints.MapControllers();
             });
 
             app.UseCors(x => x
@@ -121,10 +130,7 @@ namespace SafeProject
             .AllowAnyHeader()
             .AllowCredentials());
 
-            
-
-
-            app.MapControllers();
+           
 
             app.Run();
         }
