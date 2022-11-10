@@ -1,4 +1,5 @@
-﻿syntax = "proto3";
+﻿//for_review
+syntax = "proto3";
 
 option csharp_namespace = "ClientServiceProtos";
 

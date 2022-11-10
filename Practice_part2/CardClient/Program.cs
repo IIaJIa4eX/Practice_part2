@@ -2,6 +2,7 @@
 using static ClientServiceProtos.ClientService;
 namespace CardClient
 {
+    //for_review
     internal class Program
     {
         static void Main(string[] args)

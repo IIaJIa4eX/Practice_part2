@@ -6,6 +6,7 @@ using static ClientServiceProtos.ClientService;
 
 namespace SafeProject.Services.Repositories
 {
+    //for_review
     public class ClientService : ClientServiceBase
     {
         private readonly IAccountRepsitoryService _accountRepsitoryService;

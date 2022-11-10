@@ -15,8 +15,8 @@ namespace SafeProject
 {
     //for_review
     public class Program
-    {
-        //for_review
+    {//for_review
+        
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
