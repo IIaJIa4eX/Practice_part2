@@ -67,7 +67,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalUserCreator", "LocalUs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CertGenerator", "CertGenerator\CertGenerator.csproj", "{17494189-9DB9-43DC-AD87-5591807EAC79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardClient", "CardClient\CardClient.csproj", "{645CD1CE-5F6E-4625-9771-C369AC941404}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardClient", "CardClient\CardClient.csproj", "{645CD1CE-5F6E-4625-9771-C369AC941404}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextSearch", "TextSearch\TextSearch.csproj", "{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,6 +153,10 @@ Global
 		{645CD1CE-5F6E-4625-9771-C369AC941404}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{645CD1CE-5F6E-4625-9771-C369AC941404}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{645CD1CE-5F6E-4625-9771-C369AC941404}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -182,6 +188,7 @@ Global
 		{2119D0CD-2E73-4C6C-9FD8-E8606FD1EB1D} = {4774F546-A1AA-4672-9165-49461A2F7C4E}
 		{17494189-9DB9-43DC-AD87-5591807EAC79} = {4774F546-A1AA-4672-9165-49461A2F7C4E}
 		{645CD1CE-5F6E-4625-9771-C369AC941404} = {4774F546-A1AA-4672-9165-49461A2F7C4E}
+		{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61} = {4774F546-A1AA-4672-9165-49461A2F7C4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8E6AC8D-8744-4E85-BDD1-8C43B6BADF74}
