@@ -1,0 +1,54 @@
+﻿@model IEnumerable<User>
+@{
+    ViewBag.Title = "Сотрудники";
+}
+
+
+<a class="btn btn-success" asp-action="Create">Создать</a>
+
+@*For_Review*@
+
+@if (Model.Any())
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@user.Id" class="text-danger">
+                            Удалить
+                        </a>
+                    </td>
+                    <td>@user.Id</td>
+                    <td>
+                        <a asp-action="ShowInfo" asp-route-id="@user.Id">@user.LastName</a>
+                    </td>
+                    <td>@user.Name</td>
+                    <td>@user.Patronymic</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@user.Id">
+                            <i class="fa fa-user-edit"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <p>Сотрудников пока нет</p>
+}

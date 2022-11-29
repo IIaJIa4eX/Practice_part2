@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TextSearch.Entities;
+
+namespace TextSearch.Services.Impl
+{
+    public class DocumentRepository : IDocumentRepository
+    {
+        #region Services
+
+        private readonly DbContextText _context;
+
+        #endregion
+
+        #region Constructors
+
+        public DocumentRepository(
+            DbContextText context)
+        {
+            _context = context;
+        }
+
+        #endregion
+
+        #region IDocumentRepository Implementation
+
+        public void LoadDocuments()
+        {
+            using (var streamReader = new StreamReader(AppContext.BaseDirectory + "data.txt"))
+            {
+                while (!streamReader.EndOfStream)
+                {
+                    var doc = streamReader.ReadLine().Split('\t');
+                    if (doc.Length > 1 && int.TryParse(doc[0], out int id))
+                    {
+                        _context.Documents.Add(new Document
+                        {
+                            Id = id,
+                            Content = doc[1]
+                        });
+                        _context.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+
+    }
+}
