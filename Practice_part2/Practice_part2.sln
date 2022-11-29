@@ -69,7 +69,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CertGenerator", "CertGenera
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardClient", "CardClient\CardClient.csproj", "{645CD1CE-5F6E-4625-9771-C369AC941404}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextSearch", "TextSearch\TextSearch.csproj", "{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextSearch", "TextSearch\TextSearch.csproj", "{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Message driven arch", "Message driven arch", "{70111A30-979A-4FB2-962F-DDABC2D25D4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant", "Restaurant\Restaurant.csproj", "{7212BBCC-5986-4BE4-9E11-794E1B278251}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -157,6 +161,10 @@ Global
 		{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7212BBCC-5986-4BE4-9E11-794E1B278251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7212BBCC-5986-4BE4-9E11-794E1B278251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7212BBCC-5986-4BE4-9E11-794E1B278251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7212BBCC-5986-4BE4-9E11-794E1B278251}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -189,6 +197,7 @@ Global
 		{17494189-9DB9-43DC-AD87-5591807EAC79} = {4774F546-A1AA-4672-9165-49461A2F7C4E}
 		{645CD1CE-5F6E-4625-9771-C369AC941404} = {4774F546-A1AA-4672-9165-49461A2F7C4E}
 		{D5B3A3F8-1A59-43B1-A5F2-10DDC4001A61} = {4774F546-A1AA-4672-9165-49461A2F7C4E}
+		{7212BBCC-5986-4BE4-9E11-794E1B278251} = {70111A30-979A-4FB2-962F-DDABC2D25D4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8E6AC8D-8744-4E85-BDD1-8C43B6BADF74}
