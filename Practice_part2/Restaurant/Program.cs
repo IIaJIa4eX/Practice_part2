@@ -6,25 +6,7 @@ namespace Restaurant
 {
     internal class Program
     {
-        private static System.Timers.Timer Timer;
-        private static void SetTimer()
-        {
-            // Create a timer with a two second interval.
-            Timer = new System.Timers.Timer(10000);
-            // Hook up the Elapsed event for the timer. 
-            Timer.Elapsed += OnTimedEvent;
-            Timer.AutoReset = true;
-            Timer.Enabled = true;
-        }
-
-        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
-        {
-            Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}",
-                              e.SignalTime);
-        }
-
-
-
+      
 
         static void Main(string[] args)
         {
