@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant
 {
+    //for review
     public class RestaurantPlace
     {
         private readonly List<Table> _tables = new();

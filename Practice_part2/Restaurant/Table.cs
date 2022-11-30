@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant
 {
+    //for review
     public enum State
     {
         Free = 0,
