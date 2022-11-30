@@ -9,6 +9,7 @@ namespace Restaurant
     public class RestaurantPlace
     {
         private readonly List<Table> _tables = new();
+        private SendMessage _message = new();
 
         public RestaurantPlace()
         {
@@ -20,6 +21,7 @@ namespace Restaurant
 
         public void BookFreeTable(int personsCount)
         {
+
             Console.WriteLine("Подождите, подмираем столик синхронно..");
             var table = _tables.FirstOrDefault(t => t.SeatsCount > personsCount && t.state == State.Free);
 
@@ -31,13 +33,14 @@ namespace Restaurant
             }
             else
             {
+                table?.SetState(State.Booked);
                 Console.WriteLine($"Готово! столик номер {table.Id}");
             }
         }
 
         public void BookFreeTableAsync(int personsCount)
         {
-            Console.WriteLine("Подождите, подмираем столик синхронно..");
+            Console.WriteLine("Подождите, подмираем столик асинхронно..");
 
             Task.Run(async () =>
             {
@@ -49,11 +52,66 @@ namespace Restaurant
 
                 if (table is null)
                 {
-                    Console.WriteLine("смс - Простите, столов нет");
+                    _message.SendMessageAsync("смс - Простите, столов нет");
                 }
                 else
                 {
-                    Console.WriteLine($"смс - Готово! столик номер {table.Id}");
+                    _message.SendMessageAsync($"смс - Готово! столик номер {table.Id}");
+                }
+            });
+        }
+
+        public void UnBookTable(int tableId)
+        {
+            Console.WriteLine("Подождите, отменяем бронь синхронно..");
+            var table = _tables.FirstOrDefault(t => t.Id == tableId && t.state == State.Booked);
+
+            Thread.Sleep(1000 * 5);
+            
+            if (table is null)
+            {
+                Console.WriteLine("Такого стола не существует или он не забронирован");
+            }
+            else
+            {
+                table?.SetState(State.Free);
+                Console.WriteLine($"Готово! столик номер {table.Id} снят с брони");
+            }
+        }
+
+        public void UnBookTableAsync(int tableId)
+        {
+            Console.WriteLine("Подождите, отменяем бронь асинхронно..");
+            Task.Run(async () =>
+            {
+                var table = _tables.FirstOrDefault(t => t.Id == tableId && t.state == State.Booked);
+
+                await Task.Delay(1000 * 5);
+
+                if (table is null)
+                {
+                    _message.SendMessageAsync("смс - Такого стола не существует или он не забронирован");
+                }
+                else
+                {
+                    table?.SetState(State.Free);
+                    _message.SendMessageAsync($" смс - Готово! столик номер {table.Id} снят с брони");
+                }
+            });
+        }
+
+        public void UnbookAllTables()
+        {
+            Task.Run(async () =>
+            {
+                while (true)
+                {
+                    await Task.Delay(4000 * 5);
+                    foreach (var table in _tables)
+                    {
+                        table.SetState(State.Free);
+                    }
+                    Console.WriteLine("Все столы разбронирвоаны");
                 }
             });
         }

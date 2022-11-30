@@ -1,20 +1,43 @@
 ﻿using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
+using System.Timers;
 
 namespace Restaurant
 {
     internal class Program
     {
+        private static System.Timers.Timer Timer;
+        private static void SetTimer()
+        {
+            // Create a timer with a two second interval.
+            Timer = new System.Timers.Timer(10000);
+            // Hook up the Elapsed event for the timer. 
+            Timer.Elapsed += OnTimedEvent;
+            Timer.AutoReset = true;
+            Timer.Enabled = true;
+        }
+
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}",
+                              e.SignalTime);
+        }
+
+
+
+
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             var rest = new RestaurantPlace();
+            rest.UnbookAllTables();
+
             while (true) {
-                Console.WriteLine("Как желаете забронировать столик? \n1- по смс(асинхоонно)\n2-в порядке очереди(синхронно) ");
+                Console.WriteLine("Как желаете забронировать столик? \n1- по смс(асинхоонно)\n2-в порядке очереди(синхронно)\n3 - снять бронь синхронно\n4- снять бронь асинхронно");
 
                 if (!int.TryParse(Console.ReadLine(), out var choice) && choice is not (1 or 2))
                 {
-                    Console.WriteLine("Введите 1 или 2");
+                    Console.WriteLine("Введите 1, 2, 3, 4");
                     continue;
                 }
 
@@ -25,9 +48,29 @@ namespace Restaurant
                 {
                     rest.BookFreeTableAsync(1);
                 }
-                else
+                if(choice == 2)
                 {
                     rest.BookFreeTable(1);
+                }
+                if (choice == 3)
+                {
+                    Console.WriteLine("Ведите id стола");
+                    if (!int.TryParse(Console.ReadLine(), out var tableId))
+                    {
+                        Console.WriteLine("Введите числовой айди стола!");
+                        continue;
+                    }
+                    rest.UnBookTable(tableId);
+                }
+                if (choice == 4)
+                {
+                    Console.WriteLine("Ведите id стола");
+                    if (!int.TryParse(Console.ReadLine(), out var tableId))
+                    {
+                        Console.WriteLine("Введите числовой айди стола!");
+                        continue;
+                    }
+                    rest.UnBookTableAsync(tableId);
                 }
 
                 Console.WriteLine("Спасибо за Ваше обращение");
