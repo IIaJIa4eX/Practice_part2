@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Messaging;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,7 @@ namespace Restaurant
         private readonly List<Table> _tables = new();
         private SendMessage _message = new();
 
+        
         public RestaurantPlace()
         {
             for (int i = 1; i <= 10; i++)

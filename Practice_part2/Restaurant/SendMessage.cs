@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Restaurant
     //for review
     public class SendMessage
     {
+        private readonly Producer _producer = new("BookingNotification", "kebnekaise-01.lmq.cloudamqp.com");
         public SendMessage()
         {
 
@@ -18,8 +20,7 @@ namespace Restaurant
         {
             Task.Run(async () =>
             {
-                   await Task.Delay(1000 * 5);
-                   Console.WriteLine(message);
+                _producer.Send(message);
             });
         }
 
