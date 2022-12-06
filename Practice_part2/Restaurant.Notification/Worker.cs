@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Notification
 {
+    //for_review
     public class Worker : BackgroundService
     {
         private readonly Consumer _consumer;

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Messaging
 {
+    //for_review
     public class Consumer : IDisposable
     {
         private readonly string _queueName;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant
 {
-    //for review
+    ///for review
     public class SendMessage
     {
         private readonly Producer _producer = new("BookingNotification", "kebnekaise-01.lmq.cloudamqp.com");
