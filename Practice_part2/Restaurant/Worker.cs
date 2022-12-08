@@ -21,9 +21,16 @@ namespace Restaurant.Booking
             _place = place;
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            throw new NotImplementedException();
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                await Task.Delay(10000, stoppingToken);
+                Console.WriteLine("К сожалению, вы можете только асинхронно забронировать столик");
+                await _place.BookFreeTableAsync(1);
+            }
         }
 
         
