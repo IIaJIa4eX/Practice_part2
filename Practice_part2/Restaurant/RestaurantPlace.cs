@@ -42,27 +42,17 @@ namespace Restaurant
             }
         }
 
-        public void BookFreeTableAsync(int personsCount)
+        public async Task<bool?> BookFreeTableAsync(int personsCount)
         {
             Console.WriteLine("Подождите, подмираем столик асинхронно..");
 
-            Task.Run(async () =>
-            {
+            
                 var table = _tables.FirstOrDefault(t => t.SeatsCount > personsCount && t.state == State.Free);
 
 
                 await Task.Delay(1000 * 5);
-                table?.SetState(State.Booked);
-
-                if (table is null)
-                {
-                    _message.SendMessageAsync("смс - Простите, столов нет");
-                }
-                else
-                {
-                    _message.SendMessageAsync($"смс - Готово! столик номер {table.Id}");
-                }
-            });
+                return table?.SetState(State.Booked);
+            
         }
 
         public void UnBookTable(int tableId)
