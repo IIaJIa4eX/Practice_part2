@@ -5,7 +5,7 @@ using Restaurant.Booking;
 
 namespace Restaurant
 {
-    //for review
+    //for_review
     public class Program
     {
       

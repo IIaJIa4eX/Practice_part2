@@ -5,9 +5,10 @@ using Restaurant.Notification.Consumers;
 
 namespace Restaurant.Notification
 {
+    //for_review
     public class Program
     {
-        //for_review
+        
         public static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;

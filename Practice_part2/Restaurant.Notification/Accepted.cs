@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Notification
 {
+    //for_review
     [Flags]
     public enum Accepted
     {

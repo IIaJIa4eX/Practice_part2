@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Notification.Consumers
 {
+    //for_review
     public class NotifierTableBookedConsumer : IConsumer<ITableBooked>
     {
         private readonly Notifier _notifier;

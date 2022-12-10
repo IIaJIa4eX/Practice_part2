@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Kitchen.Consumers
 {
+    //for_review
     public class KitchenTableBookedConsumer : IConsumer<ITableBooked>
     {
 
