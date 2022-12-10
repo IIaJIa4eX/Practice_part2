@@ -1,11 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+using Restaurant.Messages;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Restaurant.Booking
 {
@@ -23,13 +19,19 @@ namespace Restaurant.Booking
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
 
             while (!stoppingToken.IsCancellationRequested)
             {
                 await Task.Delay(10000, stoppingToken);
-                Console.WriteLine("К сожалению, вы можете только асинхронно забронировать столик");
-                await _place.BookFreeTableAsync(1);
+                Console.WriteLine("К сожалению, вы можете только асинхронно забронировать столик, нажмите что-нибудь чтобы забронировать");
+                Console.ReadKey();
+
+                var result = await _place.BookFreeTableAsync(1);
+
+                await _bus.Publish(new TableBooked(NewId.NextGuid(), NewId.NextGuid(), result ?? false),
+                    context => context.Durable = false, stoppingToken);
+
             }
         }
 

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -14,8 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Messaging\Messaging.csproj" />
-    <ProjectReference Include="..\Restaurant.Kitchen\Restaurant.Kitchen.csproj" />
     <ProjectReference Include="..\Restaurant.Messages\Restaurant.Messages.csproj" />
   </ItemGroup>
 

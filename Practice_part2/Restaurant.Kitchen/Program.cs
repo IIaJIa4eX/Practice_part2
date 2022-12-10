@@ -1,17 +1,15 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Restaurant.Notification.Consumers;
+using Restaurant.Kitchen.Consumers;
 
-namespace Restaurant.Notification
+namespace Restaurant.Kitchen
 {
     public class Program
     {
-        //for_review
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-
             CreateHostBuilder(args).Build().Run();
 
         }
@@ -21,9 +19,7 @@ namespace Restaurant.Notification
             {
                 services.AddMassTransit(x =>
                 {
-                    x.AddConsumer<NotifierTableBookedConsumer>();
-                    x.AddConsumer<KitchenReadyConsumer>();
-
+                    x.AddConsumer<KitchenTableBookedConsumer>();
                     x.UsingRabbitMq((context, cfg) =>
                     {
                         cfg.Host("kebnekaise-01.lmq.cloudamqp.com", 5671, "lnvntukf", conf =>
@@ -40,10 +36,10 @@ namespace Restaurant.Notification
                         });
 
                         cfg.ConfigureEndpoints(context);
+
                     });
                 });
-                services.AddScoped<Notifier>();
-
+                services.AddTransient<Manager>();
             });
     }
 }
