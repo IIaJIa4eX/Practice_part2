@@ -24,6 +24,7 @@ namespace Restaurant.Notification
                 {
                     x.AddConsumer<NotifierTableBookedConsumer>();
                     x.AddConsumer<KitchenReadyConsumer>();
+                    x.AddConsumer<NotifyConsumer>();
 
                     x.UsingRabbitMq((context, cfg) =>
                     {
