@@ -40,7 +40,6 @@ namespace Restaurant.Notification
                             });
 
                         });
-
                         cfg.ConfigureEndpoints(context);
                     });
                 });

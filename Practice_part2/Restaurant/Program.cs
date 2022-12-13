@@ -22,8 +22,7 @@ namespace Restaurant
         private static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
             .ConfigureServices((hostContext, services) =>
             {
-
-                
+        
                 services.AddMassTransit(x =>
                 {
 

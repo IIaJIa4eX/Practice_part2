@@ -24,7 +24,7 @@ namespace Restaurant.Notification.Consumers
         {
             var result = context.Message.isReady;
 
-            _notifier.Accept(context.Message.OrderId, result ? Accepted.Kitchen : Accepted.RejectedKitchen);
+            //_notifier.Accept(context.Message.OrderId, result ? Accepted.Kitchen : Accepted.RejectedKitchen);
 
             return Task.CompletedTask;
         }

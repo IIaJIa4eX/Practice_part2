@@ -21,7 +21,7 @@ namespace Restaurant.Booking.Consumers
 
             var result = await _restaurant.BookFreeTableAsync(1);
 
-            await context.Publish(new TableBooked(context.Message.OrderId, context.Message.ClientId, result ?? false));
+            await context.Publish<ITableBooked>(new TableBooked(context.Message.OrderId, context.Message.ClientId, result ?? false));
         }
     }
 }

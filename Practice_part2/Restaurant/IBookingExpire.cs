@@ -8,6 +8,6 @@ namespace Restaurant.Booking
 {
     public  interface IBookingExpire
     {
-        public Guid OrderId { get;}
+        public Guid OrderId { get; }
     }
 }

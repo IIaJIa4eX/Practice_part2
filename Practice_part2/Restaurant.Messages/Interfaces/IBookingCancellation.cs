@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Messages.Interfaces
 {
-    public interface IBookingRequest
+    public interface IBookingCancellation
     {
+
         public Guid OrderId { get; }
 
         public Guid ClientId { get; }
 
-        public DateTime CreationDate { get; }
-
+        public DateTime CancellationDate { get; set; }
     }
 }

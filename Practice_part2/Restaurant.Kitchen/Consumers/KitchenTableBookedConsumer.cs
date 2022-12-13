@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Restaurant.Kitchen.Consumers
 {
     //for_review
-    public class KitchenTableBookedConsumer : IConsumer<ITableBooked>
+    public class KitchenTableBookedConsumer : IConsumer<IBookingRequest>
     {
 
         public readonly Manager _manager;
@@ -20,12 +20,14 @@ namespace Restaurant.Kitchen.Consumers
         {
             _manager = manager;
         }
-        public Task Consume(ConsumeContext<ITableBooked> context)
+        public Task Consume(ConsumeContext<IBookingRequest> context)
         {
-            var result = context.Message.Success;
+            var rnd = new Random().Next(1000, 10000);
 
-            if (result)
-                _manager.CheckKitchenReady(context.Message.OrderId, context.Message.PreOrder);
+            Console.WriteLine($"Проверка на кухне займёт{rnd}");
+            Task.Delay( rnd );
+
+             _manager.CheckKitchenReady(context.Message.OrderId,null);
 
             return context.ConsumeCompleted;
         }

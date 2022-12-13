@@ -43,7 +43,6 @@ namespace Restaurant.Booking
                 x => x.ReadyEventStatus, KitchenReady, TableBooked);
 
 
-
             Schedule(() => BookingExpired,
                 x => x.ExpirationId,
                 x =>
@@ -62,7 +61,7 @@ namespace Restaurant.Booking
                 })
                 .Schedule(BookingExpired,
                  context => new BookingExpire (context.Instance),
-                 context => TimeSpan.FromSeconds(1)).TransitionTo(AwaitingBookingApproved)
+                 context => TimeSpan.FromSeconds(5)).TransitionTo(AwaitingBookingApproved)
                 );
 
             During(AwaitingBookingApproved, When(BookinApproved)
@@ -79,7 +78,7 @@ namespace Restaurant.Booking
                     context.Instance.ClientId,
                     "Не получилось забронировать стол"))
                 .Publish(context => (IBookingCancellation)
-                    new BookingCancellation(context.Data.Message.OrderId))
+                    new BookingCancellation(context.Instance))
                 .Finalize(),
 
                 When(BookingExpired.Received)

@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Hosting;
 using Restaurant.Messages;
+using Restaurant.Messages.Interfaces;
 using System.Text;
 
 namespace Restaurant.Booking
@@ -28,10 +29,9 @@ namespace Restaurant.Booking
                 Console.WriteLine("К сожалению, вы можете только асинхронно забронировать столик, нажмите что-нибудь чтобы забронировать");
                 Console.ReadKey();
 
-                var result = await _place.BookFreeTableAsync(1);
+                //var result = await _place.BookFreeTableAsync(1);
 
-                await _bus.Publish(new TableBooked(NewId.NextGuid(), NewId.NextGuid(), result ?? false),
-                    context => context.Durable = false, stoppingToken);
+                await _bus.Publish(new BookingRequest(NewId.NextGuid(), NewId.NextGuid(), DateTime.UtcNow), stoppingToken);
 
             }
         }
