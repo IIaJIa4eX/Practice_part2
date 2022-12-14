@@ -58,6 +58,7 @@ namespace Restaurant
 
                         });
                         cfg.UseDelayedMessageScheduler();
+                        cfg.UseInMemoryOutbox();
                         cfg.ConfigureEndpoints(context);
                     });
                 });
@@ -68,7 +69,7 @@ namespace Restaurant
 
                 services.AddTransient<RestaurantBooking>();
                 services.AddTransient<RestaurantBookingSaga>();
-                services.AddTransient<RestaurantPlace>();
+                services.AddSingleton<RestaurantPlace>();
 
                 services.AddHostedService<Worker>();
             });

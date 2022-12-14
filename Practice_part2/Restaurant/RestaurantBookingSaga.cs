@@ -57,11 +57,11 @@ namespace Restaurant.Booking
                     context.Instance.CorrelationId = context.Data.OrderId;
                     context.Instance.OrderId = context.Data.OrderId;
                     context.Instance.ClientId = context.Data.ClientId;
-                    Console.WriteLine("Saga: " + context.Data.CreationDate);
+                    Console.WriteLine("Saga: создание заказа" + context.Data.CreationDate);
                 })
                 .Schedule(BookingExpired,
                  context => new BookingExpire (context.Instance),
-                 context => TimeSpan.FromSeconds(5)).TransitionTo(AwaitingBookingApproved)
+                 context => TimeSpan.FromSeconds(6)).TransitionTo(AwaitingBookingApproved)
                 );
 
             During(AwaitingBookingApproved, When(BookinApproved)
@@ -69,7 +69,7 @@ namespace Restaurant.Booking
                 .Publish(context =>
                 (INotify)new Notify(context.Instance.OrderId,
                                     context.Instance.ClientId,
-                                    "Стол спешно забронирован"))
+                                    "Стол успешно забронирован"))
                 .Finalize(),
 
                 When(BookingRequestFault).Then(context => Console.WriteLine("Ошибка брони"))

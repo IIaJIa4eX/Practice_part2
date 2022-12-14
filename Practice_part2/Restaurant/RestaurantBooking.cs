@@ -10,8 +10,7 @@ namespace Restaurant.Booking
         public Guid OrderId { get; set; }
         public Guid ClientId { get; set; }
         public int ReadyEventStatus { get; set; }
-        public Guid ExpirationId { get; set; }
-
+        public Guid? ExpirationId { get; set; }
 
 
         
