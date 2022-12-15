@@ -5,7 +5,7 @@ using Restaurant.Kitchen.Consumers;
 
 namespace Restaurant.Kitchen
 {
-    //for_review
+    //for__review
     public class Program
     {
         static void Main(string[] args)
@@ -20,7 +20,12 @@ namespace Restaurant.Kitchen
             {
                 services.AddMassTransit(x =>
                 {
-                    x.AddConsumer<KitchenTableBookedConsumer>();
+                    x.AddConsumer<KitchenTableBookedConsumer>(conf => 
+                        conf.UseScheduledRedelivery(retry =>
+                        retry.Intervals(TimeSpan.FromSeconds(2),
+                        TimeSpan.FromSeconds(2))
+                    ));
+
                     x.UsingRabbitMq((context, cfg) =>
                     {
                         cfg.Host("kebnekaise-01.lmq.cloudamqp.com", 5671, "lnvntukf", conf =>

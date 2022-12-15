@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Restaurant.Booking
 {
-    //for_review
+    //for__review
     public class Worker : BackgroundService
     {
         private readonly IBus _bus;
@@ -26,8 +26,8 @@ namespace Restaurant.Booking
             while (!stoppingToken.IsCancellationRequested)
             {
                 await Task.Delay(10000, stoppingToken);
-                Console.WriteLine("К сожалению, вы можете только асинхронно забронировать столик, нажмите что-нибудь чтобы забронировать");
-                Console.ReadKey();
+                Console.WriteLine("Клиент пытается забронироват стол и сделать заказ");
+                //Console.ReadKey();
 
                 //var result = await _place.BookFreeTableAsync(1);
 

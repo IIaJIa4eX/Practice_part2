@@ -7,6 +7,7 @@ using System.Net.Mime;
 
 namespace Restaurant.Booking
 {
+    //for__review
     public sealed class RestaurantBookingSaga : MassTransitStateMachine<RestaurantBooking>
     {
         public MassTransit.State AwaitingBookingApproved { get; private set; }
@@ -47,7 +48,7 @@ namespace Restaurant.Booking
                 x => x.ExpirationId,
                 x =>
                 {
-                    x.Delay = TimeSpan.FromSeconds(5);
+                    x.Delay = TimeSpan.FromSeconds(1);
                     x.Received = e => e.CorrelateById(context => context.Message.OrderId);
                 });
 

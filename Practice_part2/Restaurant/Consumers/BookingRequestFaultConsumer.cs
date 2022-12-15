@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Booking.Consumers
 {
+    //for__review
     public class BookingRequestFaultConsumer : IConsumer<Fault<IBookingRequest>>
     {
         public Task Consume(ConsumeContext<Fault<IBookingRequest>> context)

@@ -3,6 +3,7 @@ using MassTransit;
 
 namespace Restaurant.Booking
 {
+    //for__review
     public class RestaurantBooking : SagaStateMachineInstance
     {
         public Guid CorrelationId { get ; set; }

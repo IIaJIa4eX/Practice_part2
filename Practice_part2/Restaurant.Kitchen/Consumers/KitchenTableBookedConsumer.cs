@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Kitchen.Consumers
 {
-    //for_review
+    //for__review
     public class KitchenTableBookedConsumer : IConsumer<IBookingRequest>
     {
 
@@ -23,6 +23,10 @@ namespace Restaurant.Kitchen.Consumers
         public Task Consume(ConsumeContext<IBookingRequest> context)
         {
             var rnd = new Random().Next(1000, 10000);
+
+            if(rnd > 6000) {
+                throw new Exception($"Заказ не может обрабатываться так долго! - {context.Message.OrderId}");
+            }
 
             Console.WriteLine($"Проверка на кухне займёт{rnd}");
             Task.Delay( rnd );

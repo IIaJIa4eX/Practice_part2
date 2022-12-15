@@ -24,10 +24,8 @@ namespace Restaurant.Notification.Consumers
             var result = context.Message.Success;
 
             //_notifier.Accept(context.Message.OrderId, result ? Accepted.Booking : Accepted.RejectedBooking, context.Message.ClientId);
-            if (result)
-            {
-                return Task.CompletedTask;
-            }
+
+            return Task.CompletedTask;
         }
     }
 }
