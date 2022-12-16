@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Restaurant
 {
-    //for_review
+    //for__review
     public sealed class Program
     {
       
@@ -25,7 +25,7 @@ namespace Restaurant
         
                 services.AddMassTransit(x =>
                 {
-
+                    //new
                     x.AddConsumer<RestaurantBookingRequestConsumer>(conf =>
                          conf.UseMessageRetry(retry =>
 

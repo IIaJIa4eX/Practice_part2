@@ -22,6 +22,7 @@ namespace Restaurant.Booking.Consumers
 
             var result = await _restaurant.BookFreeTableAsync(1);
             
+            //new
             if(result == null )
             {
                 throw new Exception("Столов для заказа нет!");

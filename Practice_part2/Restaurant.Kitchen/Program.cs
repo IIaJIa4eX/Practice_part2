@@ -20,6 +20,7 @@ namespace Restaurant.Kitchen
             {
                 services.AddMassTransit(x =>
                 {
+                    //new
                     x.AddConsumer<KitchenTableBookedConsumer>(conf => 
                         conf.UseScheduledRedelivery(retry =>
 
