@@ -6,7 +6,7 @@ using Restaurant.Messages.Interfaces;
 
 namespace Restaurant.Booking.Consumers
 {
-    //for__review
+    //for_review
     public class RestaurantBookingRequestConsumer : IConsumer<IBookingRequest>
     {
         private readonly RestaurantPlace _restaurant;
@@ -21,6 +21,11 @@ namespace Restaurant.Booking.Consumers
             Console.WriteLine($"Заказ прилетел {context.Message.OrderId}");
 
             var result = await _restaurant.BookFreeTableAsync(1);
+            
+            if(result == null )
+            {
+                throw new Exception("Столов для заказа нет!");
+            }
 
             await context.Publish<ITableBooked>(new TableBooked(context.Message.OrderId, context.Message.ClientId, result ?? false));
         }

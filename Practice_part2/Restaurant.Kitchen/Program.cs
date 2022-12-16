@@ -5,7 +5,7 @@ using Restaurant.Kitchen.Consumers;
 
 namespace Restaurant.Kitchen
 {
-    //for__review
+    //for_review
     public class Program
     {
         static void Main(string[] args)
@@ -22,9 +22,12 @@ namespace Restaurant.Kitchen
                 {
                     x.AddConsumer<KitchenTableBookedConsumer>(conf => 
                         conf.UseScheduledRedelivery(retry =>
+
                         retry.Intervals(TimeSpan.FromSeconds(2),
                         TimeSpan.FromSeconds(2))
                     ));
+
+                    x.AddDelayedMessageScheduler();
 
                     x.UsingRabbitMq((context, cfg) =>
                     {
@@ -40,7 +43,7 @@ namespace Restaurant.Kitchen
                             });
 
                         });
-
+                        cfg.UseDelayedMessageScheduler();
                         cfg.ConfigureEndpoints(context);
 
                     });

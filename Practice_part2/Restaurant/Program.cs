@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Restaurant
 {
-    //for__review
+    //for_review
     public sealed class Program
     {
       
@@ -26,7 +26,12 @@ namespace Restaurant
                 services.AddMassTransit(x =>
                 {
 
-                    x.AddConsumer<RestaurantBookingRequestConsumer>()
+                    x.AddConsumer<RestaurantBookingRequestConsumer>(conf =>
+                         conf.UseMessageRetry(retry =>
+
+                                retry.Incremental(2,TimeSpan.FromSeconds(1),
+                                TimeSpan.FromSeconds(2)))
+                         )
                     .Endpoint(e => 
                     {
                         e.Temporary = true;          
