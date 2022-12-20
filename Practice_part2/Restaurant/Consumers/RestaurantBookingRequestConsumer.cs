@@ -6,7 +6,7 @@ using Restaurant.Messages.Interfaces;
 
 namespace Restaurant.Booking.Consumers
 {
-    //for_review
+    //for__review
     public class RestaurantBookingRequestConsumer : IConsumer<IBookingRequest>
     {
         private readonly RestaurantPlace _restaurant;
@@ -20,6 +20,8 @@ namespace Restaurant.Booking.Consumers
 
         public async Task Consume(ConsumeContext<IBookingRequest> context)
         {
+            //for testing
+            var rep = _repository.Get();
             var model = _repository.Get().FirstOrDefault(i => i.OrderId == context.Message.OrderId);
             
             if(model != null && model.CheckId(context.Message.OrderId.ToString()))
