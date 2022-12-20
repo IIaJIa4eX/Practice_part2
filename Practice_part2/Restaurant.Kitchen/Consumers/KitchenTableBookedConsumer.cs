@@ -25,7 +25,7 @@ namespace Restaurant.Kitchen.Consumers
             var rnd = new Random().Next(1000, 10000);
 
             //new
-            if(rnd > 6000) {
+            if(rnd > 11000) {
                 throw new Exception($"Заказ не может обрабатываться так долго! - {context.Message.OrderId}");
             }
 

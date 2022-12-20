@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Restaurant.Booking;
 using Restaurant.Booking.Consumers;
+using Restaurant.Messages;
+using Restaurant.Messages.Interfaces;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Restaurant
@@ -75,7 +77,7 @@ namespace Restaurant
                 services.AddTransient<RestaurantBooking>();
                 services.AddTransient<RestaurantBookingSaga>();
                 services.AddSingleton<RestaurantPlace>();
-
+                services.AddSingleton<IInMemoryRepository<BookingRequestModel>, InMemoryRepository<BookingRequestModel>>();
                 services.AddHostedService<Worker>();
             });
     }

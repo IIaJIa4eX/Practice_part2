@@ -21,7 +21,7 @@ namespace Restaurant.Booking.Consumers
         public async Task Consume(ConsumeContext<IBookingRequest> context)
         {
             var model = _repository.Get().FirstOrDefault(i => i.OrderId == context.Message.OrderId);
-            //TO DO
+            
             if(model != null && model.CheckId(context.Message.OrderId.ToString()))
             {
                 Console.WriteLine($"{context.MessageId} Это сообщение уже приходило");
@@ -42,7 +42,6 @@ namespace Restaurant.Booking.Consumers
             
             var result = await _restaurant.BookFreeTableAsync(1);
             
-            //new
             if(result == null )
             {
                 throw new Exception("Столов для заказа нет!");
