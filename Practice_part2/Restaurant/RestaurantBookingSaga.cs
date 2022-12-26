@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using Restaurant.Booking.Interfaces;
 using Restaurant.Kitchen.Inerfaces;
 using Restaurant.Messages;
 using Restaurant.Messages.Interfaces;
@@ -78,7 +79,7 @@ namespace Restaurant.Booking
                     context.Instance.OrderId,
                     context.Instance.ClientId,
                     "Не получилось забронировать стол"))
-                .Publish(context => (IBookingCancellation)
+                .Publish(context => (Restaurant.Booking.Interfaces.IBookingCancellation)
                     new BookingCancellation(context.Instance))
                 .Finalize(),
 

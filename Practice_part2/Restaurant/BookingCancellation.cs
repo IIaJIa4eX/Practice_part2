@@ -1,5 +1,7 @@
 ﻿
 
+using Restaurant.Booking.Interfaces;
+
 namespace Restaurant.Booking
 {
     public class BookingCancellation : IBookingCancellation
