@@ -16,6 +16,7 @@ using Prometheus;
 
 namespace Restaurant.Booking
 {
+    //for__review
     public class Startup
     {
 
@@ -77,7 +78,8 @@ namespace Restaurant.Booking
                     cfg.UseDelayedMessageScheduler();
                     cfg.UseInMemoryOutbox();
                     cfg.ConfigureEndpoints(context);
-
+                    
+                    //audit
                     cfg.ConnectSendAuditObservers(auditstore);
                     cfg.ConnectConsumeAuditObserver(auditstore);
                 });

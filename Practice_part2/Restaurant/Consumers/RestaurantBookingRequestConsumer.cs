@@ -7,7 +7,7 @@ using Restaurant.Messages.Interfaces;
 
 namespace Restaurant.Booking.Consumers
 {
-    //for__review
+    //for_review
     public class RestaurantBookingRequestConsumer : IConsumer<IBookingRequest>
     {
         private readonly RestaurantPlace _restaurant;

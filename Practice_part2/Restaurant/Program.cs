@@ -12,7 +12,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Restaurant
 {
-    //for__review
+    //for_review
     public sealed class Program
     {
       
