@@ -50,7 +50,7 @@ namespace Restaurant.Booking
 
                 x.AddSagaStateMachine<RestaurantBookingSaga, RestaurantBooking>().Endpoint(e => e.Temporary = true)
                 .InMemoryRepository();
-                x.AddSagaStateMachineTestHarness<RestaurantBookingSaga,RestaurantBooking>();
+                
 
                 x.AddDelayedMessageScheduler();
 
