@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ServiceLib.DAL.Repos
-{
+{    //for review
+
     public interface IRepositoryDefault<T, TId>
     {
         int? Add(T item);

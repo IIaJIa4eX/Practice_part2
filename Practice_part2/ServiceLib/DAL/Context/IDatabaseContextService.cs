@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ServiceLib.DAL.Context
-{
-    public  interface IDatabaseContextService
+{    //for review
+
+    public interface IDatabaseContextService
     {
         IList<Book> Books { get; }
     }
