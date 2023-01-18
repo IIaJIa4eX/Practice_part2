@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Wcf_Service.Interfaces
 {
+    //for_review
     [ServiceContract]
     public interface IWcf_Callback
     {

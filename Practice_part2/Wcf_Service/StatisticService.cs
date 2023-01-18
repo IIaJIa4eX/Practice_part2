@@ -5,7 +5,7 @@ using System.Web;
 using Wcf_Service.Interfaces;
 
 namespace Wcf_Service
-{
+{//for_review
     public class StatisticService : IStatisticService
     {
         public int SuccessTasks { get; set; }

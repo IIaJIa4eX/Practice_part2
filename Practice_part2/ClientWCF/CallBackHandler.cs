@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClientWCF
 {
+    //for_review
     public class CallBackHandler : IWcf_ServiseCallback
     {
         public void UpdateStatistics(StatisticService stats)

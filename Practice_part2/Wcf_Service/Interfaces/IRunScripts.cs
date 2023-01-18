@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wcf_Service.Interfaces
 {
+    //for_review
     public interface IRunScripts
     {
         bool Compile();

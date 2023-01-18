@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ClientWCF
 {
     internal class Program
-    {
+    {   //for_review
         static void Main(string[] args)
         {
             InstanceContext instance = new InstanceContext(new CallBackHandler());
