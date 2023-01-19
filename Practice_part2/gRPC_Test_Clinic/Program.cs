@@ -1,5 +1,7 @@
+using gRPC_Test_Clinic.Services.Implementation;
 using gRPC_Test_DataBase_Clinic;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace gRPC_Test_Clinic
 {
@@ -9,6 +11,17 @@ namespace gRPC_Test_Clinic
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.Listen(IPAddress.Any, 5001, listenOptions =>
+                {
+                    listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
+                });
+
+            });
+
+            builder.Services.AddGrpc();
             // Add services to the container.
             builder.Services.AddDbContext<ClinicDataBaseContext>(options =>
             {
@@ -28,8 +41,14 @@ namespace gRPC_Test_Clinic
                 app.UseSwaggerUI();
             }
 
+            app.UseRouting();
+
             app.UseAuthorization();
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGrpcService<ClinicService>();
+            });
 
             app.MapControllers();
 
