@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPC_Test_Clinic_net7.Protos";
+
+import "google/protobuf/wrappers.proto";
+
+import "google/api/http.proto";
+import "google/api/annotations.proto";
+
+package proto;
+
+
+// Working with clinic's data
+service ClinicService{
+    // CreateClient
+    rpc CreateClient (CreateClientRequest) returns (CreateClientResponse);
+    // UpdateClient
+    rpc UpdateClient (UpdateClientRequest) returns (UpdateClientResponse);
+    // DeleteClient
+    rpc DeleteClient (DeleteClientRequest) returns (DeleteClientResponse);
+
+    //Get Client By Id
+    rpc GetByClientId (GetClientByIdRequest) returns (GetClientByIdResponse){
+        option (google.api.http) = {
+        post: "/api/clientById",
+        body : "*",
+        response_body : "client"
+        };
+    }
+    //Get all clients
+    rpc GetClients (GetClientsRequest) returns (GetClientsResponse){
+        option (google.api.http) = {
+        get: "/api/clients"
+        };
+    }
+    
+}
+
+//CreateClient - Request
+message CreateClientRequest{
+    // Client's passport(string)
+    string document = 1;
+    // Client's surname(string)
+    string surname = 2;
+    // Client's firstname(string)
+    string firstname = 3;
+}
+
+message CreateClientResponse{
+    google.protobuf.Int32Value clientId = 1;
+    int32 errorCode = 2;
+    string errorMessage = 3;
+}
+
+message UpdateClientRequest{
+    int32 clientId = 1;
+    string document = 2;
+    string surname = 3;
+    string firstname = 4;
+}
+
+message UpdateClientResponse{
+    int32 errorCode = 1;
+    string errorMessage = 2;
+}
+
+message DeleteClientRequest{
+    int32 clientId = 1;
+}
+
+message DeleteClientResponse{
+    int32 errorCode = 1;
+    string errorMessage = 2;
+}
+
+message GetClientByIdRequest{
+    int32 clientId = 1;
+}
+
+message GetClientByIdResponse{
+    ClientResponse client = 1;
+    int32 errorCode = 2;
+    string errorMessage = 3;
+}
+
+
+message GetClientsRequest{
+
+}
+
+message ClientResponse{
+    int32 clientId = 1;
+    string document = 2;
+    string surname = 3;
+    string firstname = 4;
+}
+
+message GetClientsResponse{
+    repeated ClientResponse clients = 1;
+    int32 errorCode = 2;
+    string errorMessage = 3;
+}
