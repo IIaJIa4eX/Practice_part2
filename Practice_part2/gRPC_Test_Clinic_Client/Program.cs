@@ -5,6 +5,7 @@ using static gRPC_Test_Clinic_Namespace.ClinicService;
 
 namespace gRPC_Test_Clinic_Client
 {
+    //for_review
     public class Program
     {
         static void Main(string[] args)
