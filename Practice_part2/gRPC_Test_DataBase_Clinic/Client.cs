@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace gRPC_Test_DataBase_Clinic
 {
+    //for_review
     [Table("Clients")]
     public class Client
     {

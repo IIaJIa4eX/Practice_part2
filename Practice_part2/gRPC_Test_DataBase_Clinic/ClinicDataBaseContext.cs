@@ -2,6 +2,7 @@
 
 namespace gRPC_Test_DataBase_Clinic
 {
+    //for_review
     public class ClinicDataBaseContext : DbContext
     {
         public DbSet<Client> Clients { get; set; }

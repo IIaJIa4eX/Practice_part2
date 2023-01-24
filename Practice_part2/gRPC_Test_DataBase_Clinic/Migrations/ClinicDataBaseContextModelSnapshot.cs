@@ -10,6 +10,7 @@ using gRPC_Test_DataBase_Clinic;
 
 namespace gRPC_Test_DataBase_Clinic.Migrations
 {
+    //for_review
     [DbContext(typeof(ClinicDataBaseContext))]
     partial class ClinicDataBaseContextModelSnapshot : ModelSnapshot
     {

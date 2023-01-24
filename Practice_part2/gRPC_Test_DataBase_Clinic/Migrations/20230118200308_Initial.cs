@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace gRPC_Test_DataBase_Clinic.Migrations
 {
+    //for_review
     public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
