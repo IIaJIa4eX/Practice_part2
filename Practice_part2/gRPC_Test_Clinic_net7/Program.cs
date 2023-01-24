@@ -7,6 +7,8 @@ using Microsoft.OpenApi.Models;
 
 namespace gRPC_Test_Clinic_net7
 {
+    //for_review
+
     public class Program
     {
         public static void Main(string[] args)

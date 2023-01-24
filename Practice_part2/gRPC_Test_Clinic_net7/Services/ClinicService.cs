@@ -5,6 +5,8 @@ using static gRPC_Test_Clinic_net7.Protos.ClinicService;
 
 namespace gRPC_Test_Clinic_net7.Services
 {
+    //for_review
+
     public class ClinicService : ClinicServiceBase
     {
         private readonly ClinicDataBaseContext _dbContext;
