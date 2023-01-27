@@ -4,6 +4,8 @@ using System.Net;
 using Microsoft.AspNetCore.Grpc.JsonTranscoding;
 using gRPC_Test_Clinic_net7.Services;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
+using Google.Api;
 
 namespace gRPC_Test_Clinic_net7
 {
@@ -31,7 +33,9 @@ namespace gRPC_Test_Clinic_net7
 
             });
 
-            
+
+
+            builder.Services.AddSignalR();
             builder.Services.AddGrpc();
 
             //Transoding Http to Grpc format
@@ -51,6 +55,7 @@ namespace gRPC_Test_Clinic_net7
             });
 
 
+            
             builder.Services.AddGrpcSwagger();
             builder.Services.AddSwaggerGen(c =>
             {
@@ -62,6 +67,12 @@ namespace gRPC_Test_Clinic_net7
                 c.IncludeGrpcXmlComments(filePath, includeControllerXmlComments: true);
             });
 
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v2", new OpenApiInfo { Title = "SignalR", Version = "v1" });
+                // some other configs
+                options.AddSignalRSwaggerGen();
+            });
 
             var app = builder.Build();//Second step: This is my webapp after First step, this step about requests managing.
 
@@ -75,14 +86,21 @@ namespace gRPC_Test_Clinic_net7
                 });
             }
 
+            
+
             // Configure the HTTP request pipeline.
 
             //allows to manage requests
             app.UseRouting();
 
+
+            app.MapHub<SignalR_Hub>("info");
+
             app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled= true });
 
             app.MapGrpcService<ClinicService>().EnableGrpcWeb();
+
+
             app.MapGet("/", () =>
             "You need to create grps client to communicate with me"
             );
