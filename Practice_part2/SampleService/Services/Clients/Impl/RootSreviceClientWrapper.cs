@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace SampleService.Services.Clients.Impl
 {
+    //for_review
     public class RootSreviceClientWrapper : IRootServiceClientWrapper
     {
         private readonly ILogger<RootSreviceClientWrapper> _logger;

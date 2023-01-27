@@ -6,6 +6,7 @@ using SampleService.Services.Clients.Impl;
 
 namespace SampleService
 {
+    //for_review
     public class Program
     {
         public static void Main(string[] args)
