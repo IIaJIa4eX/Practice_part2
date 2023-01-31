@@ -115,9 +115,9 @@ namespace gRPC_Test_Clinic_net7
             app.MapGrpcService<ClinicService>().EnableGrpcWeb();
 
 
-            app.MapGet("/", () =>
-            "You need to create grps client to communicate with me"
-            );
+            //app.MapGet("/", () =>
+            //"You need to create grps client to communicate with me"
+            //);
 
             app.Run();
         }
