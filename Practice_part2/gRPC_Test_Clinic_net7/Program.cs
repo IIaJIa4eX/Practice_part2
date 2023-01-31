@@ -6,6 +6,7 @@ using gRPC_Test_Clinic_net7.Services;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Options;
 using Google.Api;
+using Google.Protobuf.WellKnownTypes;
 
 namespace gRPC_Test_Clinic_net7
 {
@@ -65,14 +66,26 @@ namespace gRPC_Test_Clinic_net7
                 var filePath = Path.Combine(System.AppContext.BaseDirectory, "gRPC_Test_Clinic_net7.xml");//Name is same as Project's name
                 c.IncludeXmlComments(filePath);
                 c.IncludeGrpcXmlComments(filePath, includeControllerXmlComments: true);
+                
+                
             });
 
-            builder.Services.AddSwaggerGen(options =>
+            //builder.Services.AddSwaggerGen(options =>
+            //{
+            //    options.SwaggerDoc("v2", new OpenApiInfo { Title = "SignalR", Version = "v1" });
+            //    // some other configs
+            //    options.AddSignalRSwaggerGen();
+            //});
+            builder.Services.AddSwaggerGen(c =>
             {
-                options.SwaggerDoc("v2", new OpenApiInfo { Title = "SignalR", Version = "v1" });
+                c.SwaggerDoc("v2",
+                    new OpenApiInfo { Title = "SingnalR", Version = "v2" });
                 // some other configs
-                options.AddSignalRSwaggerGen();
+                c.AddSignalRSwaggerGen();
+
             });
+
+
 
             var app = builder.Build();//Second step: This is my webapp after First step, this step about requests managing.
 
@@ -83,6 +96,7 @@ namespace gRPC_Test_Clinic_net7
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "My API V2 SingnalR");
                 });
             }
 
@@ -94,7 +108,7 @@ namespace gRPC_Test_Clinic_net7
             app.UseRouting();
 
 
-            app.MapHub<SignalR_Hub>("info");
+            app.MapHub<SignalR_Hub>("hubs/SignalR_Hub/SomeMethod");
 
             app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled= true });
 
