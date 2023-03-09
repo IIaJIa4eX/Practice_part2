@@ -1,0 +1,13 @@
+﻿namespace Script_number1
+{
+	public class NumberOne
+	{
+		public bool HeavensDoor()
+		{
+
+			return true;
+
+		}
+	}
+
+}

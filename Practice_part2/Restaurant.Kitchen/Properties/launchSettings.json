@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Restaurant.Kitchen": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:61940;http://localhost:61941"
+    }
+  }
+}

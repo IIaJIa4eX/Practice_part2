@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "CertGenerator": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:61926;http://localhost:61928"
+    }
+  }
+}
